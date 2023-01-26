@@ -8,7 +8,7 @@ import crud
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key = 'ChaveSecretashh'#add my secret key here/ and add api key to secret.sh
+app.secret_key = 'ChaveSecretashh'
 app.jinja_env.undefined = StrictUndefined
 
 connect_to_db(app)
