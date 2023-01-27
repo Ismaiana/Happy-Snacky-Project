@@ -20,15 +20,17 @@
     </form>
     </div>
 
-   
+  
     {% if data%}    
         {% for product in data['products'] %}
 
-                <p>{{product['id']}}</p>
-                <p>{{product['title']}}</p>
-                    <img src="{{product['image']}}">
+               
+                <p> <a href="/info/{{product['id']}}" name="id">{{product['title']}}</a></p>
+                <img src="{{product['image']}}">
                 
             {% endfor %}
     {% endif %}
+
+   
 {% endblock %}
 

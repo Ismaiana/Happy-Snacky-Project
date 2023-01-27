@@ -3,9 +3,25 @@
 
 {% block body %}
 
-{% if data 2 %}
-{{ data2 }}
+    {% if data%}    
+        
+            <p><h4>{{data['title']}}</h4></p>
+            <p><img src="{{data['image']}}"></p> 
+            <p><h5>Ingredients: {{data['ingredientList']}}</h5></p>
+            <p>"{{data['nutrition']}}</p> 
+            <img src="{{data['images']}}">
+            
+         
+    {% endif %}
 
-{% endif %}
+
+
+
+
+
+
+
+
+
 
 {% endblock %}

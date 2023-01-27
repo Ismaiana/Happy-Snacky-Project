@@ -53,42 +53,41 @@ def find_snack():
     data = response.json()
 
     
-    id = int(data['products'][0]['id'])
+
 
     return render_template('search.html', data=data, id=id)
 
 
 
 
-@app.route('/info')
-def snack_info():
+# @app.route('/info')
+# def snack_info():
 
-    return render_template('info.html', id=None)
+#     return render_template('info.html', data=None)
 
 
-@app.route('/info')
-def display_snacks():
+@app.route('/info/<id>')
+def display_snacks(id):
     
     headers = {
     "Content-Type": "application/json"
-    
+ 
     }
 
-    id =  request.form.get("id")
     parameters2 = {
     "id": id,
     "apiKey": app.Spoonacular_KEY 
 
     }
 
-    response = requests.get(f"https://api.spoonacular.com/food/products/{id}", params=parameters2, headers = headers)
+    response = requests.get(f"https://api.spoonacular.com/food/products/{id}", params=parameters2, headers=headers)
 
     data2 = response.json()
 
     
-    # print(data3["id"], data3["title"], data3["ingredientList"], data3["ingredients"])
+    
 
-    return render_template('info.html', data=data2, id=id)
+    return render_template('info.html', data=data2)
 
 
 # @app.route('product')
