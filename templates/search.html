@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Happy Snacky{% endblock %}
+
+
+
+{% block body %}    
+
+
+<div class="main-search-input-wrap" >
+       
+    <form action="/search" method="POST">
+    <div class="main-search-input fl-wrap">
+        <h2><div class="main-search-input-item">
+            <input type="text" name="product"  id="results" value="" placeholder="Search Products...">             
+                <button class="main-search-button">Search</button>
+        </div></h2>
+        </div>
+        
+    </form>
+    </div>
+
+   
+    {% if data%}    
+        {% for product in data['products'] %}
+
+                <p>{{product['id']}}</p>
+                <p>{{product['title']}}</p>
+                    <img src="{{product['image']}}">
+                
+            {% endfor %}
+    {% endif %}
+{% endblock %}
+
