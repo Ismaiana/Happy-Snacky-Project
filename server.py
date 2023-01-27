@@ -5,15 +5,16 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 import os
 import crud
+import requests
+import json
 
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("secret_key")
 app.jinja_env.undefined = StrictUndefined
-
+app.secret_key = os.environ["secret_key"]
+app.Spoonacular_KEY = os.environ["Spoonacular_KEY"]
 connect_to_db(app)
-#API_KEY = os.environ['Spoonacular_KEY']
 
 @app.route('/')
 def homepage():
@@ -21,17 +22,75 @@ def homepage():
 
     return render_template('homepage.html')
 
-# @app.route('products/search')
-# def find_snack():
-#     """Search snack in spoonacular"""
 
-#     url =''
-#     payload = {'apikey': API_KEY }
 
-#     id=
-#     name=
-#     image=
+@app.route('/search')
+def search_bar():
+
+    return render_template('search.html', data=None)
+
+
+@app.route('/search', methods=['POST'])
+def find_snack():
+    """Return user search"""
+
+    products = request.form.get('product')
+
+    parameters = {
+    'apiKey': app.Spoonacular_KEY,
+    'query': products
+    }
+
+    headers = {
+    'Content-Type': 'application/json'
+    }
+
+
+    response = requests.get('https://api.spoonacular.com/food/products/search', params=parameters, headers=headers)
+
+    response.raise_for_status()
+
+    data = response.json()
+
     
+    id = int(data['products'][0]['id'])
+
+    return render_template('search.html', data=data, id=id)
+
+
+
+
+@app.route('/info')
+def snack_info():
+
+    return render_template('info.html', id=None)
+
+
+@app.route('/info')
+def display_snacks():
+    
+    headers = {
+    "Content-Type": "application/json"
+    
+    }
+
+    id =  request.form.get("id")
+    parameters2 = {
+    "id": id,
+    "apiKey": app.Spoonacular_KEY 
+
+    }
+
+    response = requests.get(f"https://api.spoonacular.com/food/products/{id}", params=parameters2, headers = headers)
+
+    data2 = response.json()
+
+    
+    # print(data3["id"], data3["title"], data3["ingredientList"], data3["ingredients"])
+
+    return render_template('info.html', data=data2, id=id)
+
+
 # @app.route('product')
 # def snack_information():
 #     """Display snack ingredients"""
