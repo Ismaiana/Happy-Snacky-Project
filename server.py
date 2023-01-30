@@ -20,13 +20,14 @@ connect_to_db(app)
 def homepage():
     """display homepage with login form."""
 
-    return render_template('homepage.html')
 
+    return render_template('homepage.html')
 
 
 @app.route('/search')
 def search_bar():
     """Display search bar"""
+
 
     return render_template('search.html', data=None)
 
@@ -53,11 +54,8 @@ def find_snack():
 
     data = response.json()
 
-    
-
 
     return render_template('search.html', data=data, id=id)
-
 
 
 @app.route('/info/<id>')
@@ -80,11 +78,7 @@ def snack_info(id):
     data2 = response.json()
 
     
-    
-
     return render_template('info.html', data=data2)
-
-
 
 
 @app.route('/savedsnacks')
@@ -92,15 +86,12 @@ def show_snacks():
     """display saved snacks"""
 
 
-
     return render_template('savedsnacks.html')
-
 
 
 @app.route('/register')
 def new_user():
     """Display form to create a new user"""
-
 
 
     return render_template('register.html')
@@ -109,6 +100,7 @@ def new_user():
 @app.route('/register', methods=['POST'])
 def user_registration():
     """Create a new user and add information to db"""
+
 
     email = request.form.get('email')
     password = request.form.get('password')
@@ -127,12 +119,9 @@ def user_registration():
         user = crud.create_user(email, password, fname, lname)
         db.session.add(user)
         db.session.commit()
-        flash('Account created with sucess!')
+        flash('Account created with sucess! Please log in to your account.')
 
-        return redirect('/profile')
-
-
-
+        return redirect('/')
 
 
 @app.route('/login', methods=['POST'])
@@ -140,7 +129,6 @@ def user_registration():
 def login_form():
     """Process user login"""
 
-  
     email = request.form.get('email')
     password = request.form.get('password')
 
@@ -157,17 +145,14 @@ def login_form():
     else:
 
         session['user_email'] = user.email
-        flash(f'Welcome back, {user.fname}!')
+        flash(f'Welcome {user.fname}!')
 
         return redirect('/profile')
-
-
 
 
 @app.route('/profile')
 def user_profile():
     """Show user profile"""
-
 
     if 'user_email' in session:
 
@@ -182,8 +167,6 @@ def user_profile():
     else:
 
         return redirect('/')
-
-
 
 
 @app.route('/logout')
