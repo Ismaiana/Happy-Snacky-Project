@@ -26,6 +26,7 @@ def homepage():
 
 @app.route('/search')
 def search_bar():
+    """Display search bar"""
 
     return render_template('search.html', data=None)
 
@@ -59,15 +60,9 @@ def find_snack():
 
 
 
-
-# @app.route('/info')
-# def snack_info():
-
-#     return render_template('info.html', data=None)
-
-
 @app.route('/info/<id>')
-def display_snacks(id):
+def snack_info(id):
+    """Display info of searched snacks"""
     
     headers = {
     "Content-Type": "application/json"
@@ -90,15 +85,15 @@ def display_snacks(id):
     return render_template('info.html', data=data2)
 
 
-# @app.route('product')
-# def snack_information():
-#     """Display snack ingredients"""
+
+
+@app.route('/savedsnacks')
+def show_snacks():
+    """display saved snacks"""
 
 
 
-# @app.route('/savedsnacks')
-# def show_snacks():
-#     """display saved snacks"""
+    return render_template('savedsnacks.html')
 
 
 
@@ -136,12 +131,16 @@ def user_registration():
 
         return redirect('/profile')
 
+
+
+
+
 @app.route('/login', methods=['POST'])
 
 def login_form():
     """Process user login"""
 
-    
+  
     email = request.form.get('email')
     password = request.form.get('password')
 
@@ -157,10 +156,11 @@ def login_form():
         
     else:
 
-        session['email'] = user.email
+        session['user_email'] = user.email
         flash(f'Welcome back, {user.fname}!')
 
         return redirect('/profile')
+
 
 
 
@@ -168,12 +168,33 @@ def login_form():
 def user_profile():
     """Show user profile"""
 
-    return render_template('profile.html')
+
+    if 'user_email' in session:
+
+        email = session['user_email']
+
+ 
+        user = crud.get_user_by_email(email)
+
+
+        return render_template('profile.html', email= user.email, fname= user.fname, lname= user.lname)
+
+    else:
+
+        return redirect('/')
+
+
+
 
 @app.route('/logout')
 def process_logout():
+    """Log out user in session"""
 
-    del session['email']
+    request.form.get('logout')
+
+    session['user_email']
+
+    session.pop('user_email', None)
     flash('Logged out.')
     
     return redirect('/')
