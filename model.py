@@ -15,7 +15,7 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     
-    badingredients = db.relationship('Badingredient', back_populates='user')
+    restrictions = db.relationship('Badingredient', back_populates='user')
     savedsafe = db.relationship('Savedsafe', back_populates='user')
     savednotsafe = db.relationship('Savednotsafe', back_populates='user')
 
@@ -25,16 +25,17 @@ class User(db.Model):
 
 class Badingredient(db.Model):
 
-    __tablename__ = 'bad_ingredients'
+    __tablename__ = 'restrictions'
 
-    ingredient_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    restriction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    ingredient = db.Column(db.String)
+    dietary_restriction = db.Column(db.String, nullable=False)
+
     
-    user = db.relationship('User', back_populates='badingredients')
+    user = db.relationship('User', back_populates='restrictions')
 
     def __repr__(self): 
-        return f'<Badingredient ingredient_id={self.ingredient_id} ingredient={self.ingredient}>'
+        return f'<Badingredient restriction_id={self.restriction_id} dietary_restriction={self.dietary_restriction}>'
 
 
 class Savedsafe(db.Model):
@@ -43,36 +44,34 @@ class Savedsafe(db.Model):
 
     snack_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    snack_name = db.Column(db.String, nullable=False)
-    snack_brand = db.Column(db.String, nullable=False)
+    title = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
     
     user = db.relationship('User', back_populates='savedsafe')
 
     def __repr__(self): 
-        return f'<Savedsafe snack_id={self.snack_id} snack_name={self.snack_name}>'
+        return f'<Savedsafe snack_id={self.snack_id} title={self.title}>'
 
 
 class Savednotsafe(db.Model):
     
     __tablename__ = 'notsafe_snacks'
 
-    nsnack_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    snack_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    snack_name = db.Column(db.String, nullable=False)
-    snack_brand = db.Column(db.String, nullable=False)
+    title = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
-    bad_ingredients= db.Column(db.String)
+    ingredients= db.Column(db.String)
 
     user = db.relationship('User', back_populates='savednotsafe')
 
     def __repr__(self): 
-        return f'<Savednotsafe nsnack_id={self.nsnack_id} snack_name={self.snack_name}>'
+        return f'<Savednotsafe nsnack_id={self.snack_id} title={self.title}>'
 
 
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///snacks", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///snacks", echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -86,4 +85,5 @@ if __name__ == "__main__":
     from server import app
 
     connect_to_db(app)
+    app.app_context().push()
     db.create_all()

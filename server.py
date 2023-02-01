@@ -16,6 +16,7 @@ app.secret_key = os.environ["secret_key"]
 app.Spoonacular_KEY = os.environ["Spoonacular_KEY"]
 connect_to_db(app)
 
+
 @app.route('/')
 def homepage():
     """display homepage with login form."""
@@ -81,14 +82,6 @@ def snack_info(id):
     return render_template('info.html', data=data2)
 
 
-@app.route('/savedsnacks')
-def show_snacks():
-    """display saved snacks"""
-
-
-    return render_template('savedsnacks.html')
-
-
 @app.route('/register')
 def new_user():
     """Display form to create a new user"""
@@ -134,7 +127,6 @@ def login_form():
 
     user = crud.get_user_by_email(email)
    
-
    
     if not user or user.password != password:
 
@@ -150,6 +142,28 @@ def login_form():
         return redirect('/profile')
 
 
+@app.route('/addrestrictions', methods=['GET','POST'])
+def add_restrictions():
+    """Allow user to add dietary restrictions"""
+
+   
+    email= session['user_email']
+    user = crud.get_user_by_email(email)
+   
+        
+    if request.method == 'POST':
+        dietary_restrictions = request.form.getlist('restrictions')
+        for dietary_restriction in dietary_restrictions:
+            get_restriction = crud.get_restriction(user.user_id, dietary_restriction)
+            if get_restriction == []:
+                restrictions = crud.create_restrictions(user.user_id, dietary_restriction)
+                db.session.add(restrictions)
+                db.session.commit()
+        return redirect('/profile')
+  
+
+    return render_template('/addrestrictions.html')
+
 @app.route('/profile')
 def user_profile():
     """Show user profile"""
@@ -160,14 +174,67 @@ def user_profile():
 
  
         user = crud.get_user_by_email(email)
-
+      
 
         return render_template('profile.html', email= user.email, fname= user.fname, lname= user.lname)
 
     else:
 
+
         return redirect('/')
 
+
+@app.route('/savedsnacks')
+def show_snacks():
+    """display saved snacks"""
+
+    email= session['user_email']
+    user = crud.get_user_by_email(email)
+    saved_snacks = crud.get_safesnack(user.user_id)
+    not_safe= crud.get_notsafesnack(user.user_id)
+    
+
+
+
+    return render_template('savedsnacks.html', saved_snacks=saved_snacks, not_safe=not_safe)
+
+
+@app.route('/safesnacks', methods=['GET','POST'])
+def saved_snacks():
+    """Save snacks process for save for later snacks button"""
+
+    email= session['user_email']
+    user = crud.get_user_by_email(email)
+
+
+   
+    title= request.form.get('title')
+    image= request.form.get('image')
+    save= crud.create_savedsafe(user.user_id, title, image)
+    db.session.add(save)
+    db.session.commit()
+
+
+    return redirect('/savedsnacks')
+    
+@app.route('/notsafesnacks', methods=['GET', 'POST'])
+def not_safe():
+    """Save snacks process for not safe snacks button"""
+
+    email= session['user_email']
+    user = crud.get_user_by_email(email)
+
+
+   
+    title= request.form.get('title')
+    image= request.form.get('image')
+    ingredients= request.form.get('ingredients')
+    save_notsafe= crud.create_savednotsafe(user.user_id, title, image, ingredients)
+    db.session.add(save_notsafe)
+    db.session.commit()
+
+    return redirect('/savedsnacks')
+    
 
 @app.route('/logout')
 def process_logout():
@@ -182,9 +249,9 @@ def process_logout():
     
     return redirect('/')
 
-# @app.route('/preferences')
-# def user_allergens():
-#     """User choice for ingredients """
+# @app.route('/settings')
+# def user_settings():
+#     """Display settings options"""
 
 
 

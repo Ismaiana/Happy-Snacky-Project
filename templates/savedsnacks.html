@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Happy Snacky{% endblock %}
+
+{% block body %}
+
+<p><strong> SNACKS FOR LATER </strong></p>
+{% for saved_snack in saved_snacks %}
+
+
+        <p>{{saved_snack['title']}}</p>
+        <img src="{{saved_snack['image']}}">
+
+
+{% endfor %}
+
+
+<p><strong> NOT SAFE FOR ME :( </strong></p>
+
+{% for snack in not_safe %}
+
+  
+        <p>{{snack['title']}}</p>
+        <img src="{{snack['image']}}">
+        <p><h6>{{snack['ingredients']}}</h6></p>
+
+
+ 
+
+{% endfor %}
+
+
+<script src="/static/search-data.js"></script>
+
+{% endblock %}

@@ -12,8 +12,6 @@
    {% endwith %}
 
    <div class="profile-title"><h2>Profile</h2></div>
-
-
    <section class="vh-100" style="background-color: #f0f0f3;">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-left align-items-left h-100">
@@ -24,7 +22,7 @@
                   style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                   <img src="https://th.bing.com/th/id/R.d40830f2d3e2d6889db42feae14e1976?rik=tZojAzgiFfdt%2fw&riu=http%3a%2f%2fsrnet.ca%2fwp-content%2fuploads%2f2017%2f01%2fDefault-Profile.png&ehk=p2iaRHoA85rN%2b3KMeBpgvoKZ2g%2bgt8m6QnNmyGFwcv8%3d&risl=&pid=ImgRaw&r=0"
                     alt="profile-pic" class="img-fluid my-5" style="width: 100px;" />
-                  <h5>User name</h5>
+
                   <i class="far fa-edit mb-5"></i>
                 </div>
                 <div class="col-md-8">
@@ -43,13 +41,18 @@
                     </div>
                     <h6>Email</h6>
                     <p class="text-muted" name="email">{{email}}</p>
-                    <div class="row pt-1">
-                      <div class="col-6 mb-3">
-                        <h6>Allergies</h6>
-                        <p class="text-muted">Allergies list</p>
-                        <h6>Special diet</h6>
-                        <p class="text-muted">Diet type or None</p>
+                    <div class="row pt-4">
+                      <div class="col-6 mb-4">
+                        <h6>Dietary Restrictions</h6>
+                        <p class="text-muted">dietary_restrictions</p>
                       </div>
+                      
+                      <form action="/addrestrictions">
+
+                        
+                        <input type="submit" value="Add Restrictions ">
+            
+                      </form>
                
                     </div>
                     </div>
@@ -59,7 +62,13 @@
             </div>
           </div>
         </div>
-    </section>
+    </section>      
+
+
+  
+
+
+
 
 
 {% endblock %}

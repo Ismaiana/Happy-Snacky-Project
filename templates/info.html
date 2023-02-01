@@ -3,8 +3,27 @@
 
 {% block body %}
 
+      
+
     {% if data%}    
+        <form action="/safesnacks" method="POST">
+
+        <input type="hidden" value="{{data['title']}}" name="title" >
+        <input type="hidden" value="{{data['image']}}" name="image">
+        <button class="a btn btn-success" type="submit" name="saves"><i class="bi bi-bookmark-heart-fill"></i> | Save For Later</button>
+
         
+        </form>
+                  
+        <form action="/notsafesnacks" method="POST">
+
+        <input type="hidden" value="{{data['title']}}" name="title" >
+        <input type="hidden" value="{{data['image']}}" name="image">
+        <input type="hidden" value="{{data['ingredientList']}}" name="ingredients">
+        <button class="b btn btn-danger" type="submit" name="saven"><i class="bi bi-emoji-frown"></i> | Not Safe List</button>
+        </form>
+
+
             <p><h4>{{data['title']}}</h4></p>
             <p><img src="{{data['image']}}"></p> 
             <p><h5>Ingredients: {{data['ingredientList']}}</h5></p>
@@ -17,8 +36,8 @@
     {% endif %}
 
 
-
-
+        
+    <script src="/static/search-data.js"></script>
 
 
 

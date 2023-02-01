@@ -16,17 +16,15 @@
                 <button class="main-search-button">Search</button>
         </div></h2>
         </div>
-        
     </form>
     </div>
 
   
     {% if data%}    
         {% for product in data['products'] %}
-
                
-                <p> <a href="/info/{{product['id']}}">{{product['title']}}</a></p>
-                <img src="{{product['image']}}">
+            <p> <a href="/info/{{product['id']}}">{{product['title']}}</a></p>
+            <img src="{{product['image']}}">
                 
             {% endfor %}
     {% endif %}

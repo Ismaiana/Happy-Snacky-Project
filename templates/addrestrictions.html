@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Add Restrictions {% endblock %}
+
+{% block body %}
+
+<form action="/addrestrictions" method="POST">
+
+
+ 
+    <h3>Dietary Restrictions</h3>
+ 
+    <input type="checkbox" id="egg-free"  value="egg free" name="restrictions">
+    <label for="egg_free"> Egg free</label><br>
+    <input type="checkbox" id="peanut-free"  value="peanut free" name="restrictions">
+    <label for="peanut_free"> Peanut free</label><br>
+    <input type="checkbox" id="nut-free" value="nut free" name="restrictions">
+    <label for="nut_free"> Nut free</label><br>
+    <input type="checkbox" id="soy-free" value="soy free" name="restrictions">
+    <label for="soy_free"> Soy free</label><br>
+    <input type="checkbox" id="corn-free" value="corn free" name="restrictions">
+    <label for="corn_free"> Corn free</label><br>
+    <input type="checkbox" id="sugar-free" value="sugar free" name="restrictions">
+    <label for="sugar_free"> Sugar free</label><br>
+    <input type="checkbox" id="dairy-free" value="dairy free" name="restrictions">
+    <label for="dairy_free"> Dairy free</label><br>
+    <input type="checkbox" id="gluten-free" value="gluten free" name="restrictions">
+    <label for="gluten_free"> Gluten free</label><br>
+    <input type="checkbox" id="msg-free" value="msg free" name="restrictions">
+    <label for="msg_free"> Msg free</label><br>
+    <input type="checkbox" id="vegan" value="animal free" name="restrictions">
+    <label for="vegan"> Animal free (Vegan Diet)</label><br>
+    <input type="checkbox" id="vegetarian" value="meat free" name="restrictions">
+    <label for="vegetarian'"> Meat free (Vegetarian Diet)</label><br>
+    
+
+    <p>
+    <input type="submit" value="Save">
+    </p>
+</form>
+
+
+    {% endblock %}

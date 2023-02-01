@@ -10,25 +10,39 @@ def create_user(email, password, fname, lname):
     return user
 
 
-def create__badingredient(user, ingredient):
-
-    badingredients = Badingredient(user_id=user, ingredient=ingredient)
-
-    return badingredients
-
+def create_restrictions(user, dietary_restriction):
     
-def create_savedsafe(user, snack_name, snack_brand, image):
+    restrictions= Badingredient(user_id=user, dietary_restriction=dietary_restriction)
 
-    savedsafe= Savedsafe(user_id=user,snack_brand=snack_brand, snack_name=snack_name, image=image)
-
-    return savedsafe
+    return restrictions
 
 
-def create_savednotsafe(user, snack_name, snack_brand, image, bad_ingredients):
 
-    savednotsafe= Savednotsafe(user_id=user,snack_brand=snack_brand, snack_name=snack_name, image=image, bad_ingredients=bad_ingredients)
+def get_restriction(user, dietary_restriction):
+   
 
-    return savednotsafe
+    return Badingredient.query.filter_by(user_id= user, dietary_restriction= dietary_restriction).all()
+    
+def create_savedsafe(user, title, image):
+
+    safe_snacks= Savedsafe(user_id=user, title=title, image=image)
+
+    return safe_snacks
+
+def get_safesnack(user):
+
+    return Savedsafe.query.filter_by(user_id=user).all()
+
+def create_savednotsafe(user, title, image, ingredients):
+
+    notsafe_snacks= Savednotsafe(user_id=user, title=title, image=image, ingredients=ingredients)
+
+    return notsafe_snacks
+
+def get_notsafesnack(user):
+
+    return Savednotsafe.query.filter_by(user_id=user).all()
+
 
 def get_users():
     
