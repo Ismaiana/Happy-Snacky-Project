@@ -36,7 +36,7 @@
     </form>
 
 
-
+<div class="food-generator">
     <form action="/random" method="POST">
 
         <p> Don't know what to eat? </p>
@@ -71,12 +71,21 @@
       
        
     
-       
+            
+    {% if data is defined %}    
+    
+           
+        <p> <strong>{{data['title']}}</strong></p>
+        <img src="{{data['image']}}">
+        
+            
+     
+    {% endif %}
    
 
 
     </form>
-
+</div>
 
 
     {% endblock %}

@@ -147,12 +147,6 @@ def login_form():
 def random_snack():
     """Generate random snack via button and ingredients filter"""
 
-    # email= session['user_email']
-    # user = crud.get_user_by_email(email)
-
-    
-    #WAITING FOR API ACCESS TO FINISH THIS ROUTE
-
 
     filters= request.form.getlist('restrictions2')
     print(filters)
@@ -171,12 +165,12 @@ def random_snack():
     response.raise_for_status()
 
     data3 = response.json()
-    print(data3)
+
     random_snack = random.choices(data3['products'])
-    print(random_snack)
+    random_snack = random_snack[0]
  
 
-    return render_template('/', data=random_snack)
+    return render_template('homepage.html', data=random_snack)
 
    
 
@@ -204,15 +198,6 @@ def add_restrictions():
 
     return render_template('/addrestrictions.html')
 
-@app.route('/removerestrictions', methods=['POST'])
-def remove_restrictions():
-
-    email= session['user_email']
-    user = crud.get_user_by_email(email)
-
-
-
-    return render_template('/addrestrictions.html')
 
 @app.route('/profile')
 def user_profile():
