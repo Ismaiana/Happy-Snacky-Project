@@ -174,7 +174,7 @@ def random_snack():
     print(data3)
     random_snack = random.choices(data3['products'])
     print(random_snack)
-
+ 
 
     return render_template('/', data=random_snack)
 
@@ -204,7 +204,7 @@ def add_restrictions():
 
     return render_template('/addrestrictions.html')
 
-@app.route('removerestrictions', methods=['POST'])
+@app.route('/removerestrictions', methods=['POST'])
 def remove_restrictions():
 
     email= session['user_email']
@@ -218,15 +218,17 @@ def remove_restrictions():
 def user_profile():
     """Show user profile"""
 
+
     if 'user_email' in session:
 
         email = session['user_email']
-
  
         user = crud.get_user_by_email(email)
-      
-
-        return render_template('profile.html', email= user.email, fname= user.fname, lname= user.lname)
+        
+        restriction = crud.get_restrictiondb(user.user_id)
+    
+        
+        return render_template('profile.html', email= user.email, fname= user.fname, lname= user.lname, restriction=restriction)
 
     else:
 

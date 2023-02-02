@@ -43,11 +43,15 @@
                     <p class="text-muted" name="email">{{email}}</p>
                     <div class="row pt-4">
                       <div class="col-6 mb-4">
+                        <form action="/addrestrictions">
                         <h6>Dietary Restrictions</h6>
-                        <p class="text-muted">dietary_restrictions</p>
-                      </div>
-                      
-                      <form action="/addrestrictions">
+                        {% for ing in restriction %}
+                          {%if restriction%}
+                        <p class="text-muted">{{ing['dietary_restriction']}}</p>
+                    
+                          {% endif %}
+                        {% endfor %}
+                
 
                         
                         <input type="submit" value="Add Restrictions ">
