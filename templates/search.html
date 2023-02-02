@@ -7,6 +7,8 @@
 {% block body %}    
 
 
+
+
 <div class="main-search-input-wrap" >
        
     <form action="/search" method="POST">
@@ -19,7 +21,6 @@
     </form>
     </div>
 
-  
     {% if data%}    
         {% for product in data['products'] %}
                
@@ -30,5 +31,9 @@
     {% endif %}
 
    
+
+
+
+
 {% endblock %}
 

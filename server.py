@@ -6,6 +6,7 @@ from model import connect_to_db, db
 import os
 import crud
 import requests
+import random
 import json
 
 from jinja2 import StrictUndefined
@@ -142,6 +143,45 @@ def login_form():
         return redirect('/profile')
 
 
+@app.route('/random', methods=['GET', 'POST'])
+def random_snack():
+    """Generate random snack via button and ingredients filter"""
+
+    # email= session['user_email']
+    # user = crud.get_user_by_email(email)
+
+    
+    #WAITING FOR API ACCESS TO FINISH THIS ROUTE
+
+
+    filters= request.form.getlist('restrictions2')
+    print(filters)
+
+    parameters = {
+    'apiKey': app.Spoonacular_KEY,
+    'query': filters
+    }
+
+    headers = {
+    'Content-Type': 'application/json'
+    }
+
+    response = requests.get('https://api.spoonacular.com/food/products/search', params=parameters, headers=headers)
+
+    response.raise_for_status()
+
+    data3 = response.json()
+    print(data3)
+    random_snack = random.choices(data3['products'])
+    print(random_snack)
+
+
+    return render_template('/', data=random_snack)
+
+   
+
+
+
 @app.route('/addrestrictions', methods=['GET','POST'])
 def add_restrictions():
     """Allow user to add dietary restrictions"""
@@ -161,6 +201,16 @@ def add_restrictions():
                 db.session.commit()
         return redirect('/profile')
   
+
+    return render_template('/addrestrictions.html')
+
+@app.route('removerestrictions', methods=['POST'])
+def remove_restrictions():
+
+    email= session['user_email']
+    user = crud.get_user_by_email(email)
+
+
 
     return render_template('/addrestrictions.html')
 
@@ -217,6 +267,8 @@ def saved_snacks():
 
     return redirect('/savedsnacks')
     
+
+
 @app.route('/notsafesnacks', methods=['GET', 'POST'])
 def not_safe():
     """Save snacks process for not safe snacks button"""
