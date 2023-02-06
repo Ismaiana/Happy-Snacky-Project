@@ -1,7 +1,7 @@
 """Server for happy snacky app"""
 
 
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 import os
 import crud
@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined
 app.secret_key = os.environ["secret_key"]
 app.Spoonacular_KEY = os.environ["Spoonacular_KEY"]
+app.Host_KEY = os.environ["Host_KEY"]
 connect_to_db(app)
 
 
@@ -38,47 +39,65 @@ def search_bar():
 def find_snack():
     """Return user search"""
 
-    products = request.form.get('product')
+  
+        
+    if 'user_email' in session:
 
-    parameters = {
-    'apiKey': app.Spoonacular_KEY,
-    'query': products
-    }
+        
+        email = session['user_email']
+ 
+        crud.get_user_by_email(email)
 
-    headers = {
-    'Content-Type': 'application/json'
-    }
+        products = request.form.get('product')
+
+        
+        url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search"
+
+        parameters = {
+            "query": products
+            }
+
+        headers = {
+            "X-RapidAPI-Key": app.Spoonacular_KEY,
+            "X-RapidAPI-Host": app.Host_KEY
+        }
+
+        response = requests.request("GET", url, headers=headers, params=parameters)
+
+        response.raise_for_status()
+
+        data = response.json()
+
+        return render_template('search.html', data=data, id=id)
 
 
-    response = requests.get('https://api.spoonacular.com/food/products/search', params=parameters, headers=headers)
+    else:
 
-    response.raise_for_status()
+        flash('Login required to use search feature.')
 
-    data = response.json()
+        return redirect('/')
 
-
-    return render_template('search.html', data=data, id=id)
 
 
 @app.route('/info/<id>')
 def snack_info(id):
     """Display info of searched snacks"""
-    
-    headers = {
-    "Content-Type": "application/json"
- 
-    }
+
 
     parameters2 = {
     "id": id,
-    "apiKey": app.Spoonacular_KEY 
-
+    
     }
 
-    response = requests.get(f"https://api.spoonacular.com/food/products/{id}", params=parameters2, headers=headers)
+    
+    headers = {
+        "X-RapidAPI-Key": app.Spoonacular_KEY,
+        "X-RapidAPI-Host": app.Host_KEY
+    }
+
+    response = requests.get(f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}", params=parameters2, headers=headers)
 
     data2 = response.json()
-
     
     return render_template('info.html', data=data2)
 
@@ -157,10 +176,11 @@ def random_snack():
     }
 
     headers = {
-    'Content-Type': 'application/json'
+     "X-RapidAPI-Key": app.Spoonacular_KEY,
+     "X-RapidAPI-Host": app.Host_KEY
     }
 
-    response = requests.get('https://api.spoonacular.com/food/products/search', params=parameters, headers=headers)
+    response = requests.get('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search', params=parameters, headers=headers)
 
     response.raise_for_status()
 
@@ -197,6 +217,46 @@ def add_restrictions():
   
 
     return render_template('/addrestrictions.html')
+
+
+@app.route('/restrictions')
+def restrictions():
+    """Display info of searched snacks"""
+
+    email = session['user_email']
+ 
+    user = crud.get_user_by_email(email)
+        
+    restriction = crud.get_restrictiondb(user.user_id)
+
+
+    restriction_data = []
+    for r in restriction:
+
+        d = {'dietary restriction': r.dietary_restriction}
+
+        restriction_data.append(d['dietary restriction'])
+
+    
+    return jsonify(restriction_data)
+
+@app.route('/removerestriction', methods=['POST'])
+def remove_restriction():
+    """remove restriction from data base and user profile"""
+
+    email = session['user_email']
+ 
+    user = crud.get_user_by_email(email)
+
+    restrictions = request.form.get('removeRestrictions')
+
+    remove_ing = crud.remove_restrictions(user.user_id)
+
+    db.session.delete(remove_ing)
+    db.session.commit()
+
+    return redirect('/profile')
+
 
 
 @app.route('/profile')
@@ -287,12 +347,6 @@ def process_logout():
     flash('Logged out.')
     
     return redirect('/')
-
-# @app.route('/settings')
-# def user_settings():
-#     """Display settings options"""
-
-
 
 
 if __name__ == "__main__":

@@ -1,0 +1,17 @@
+/* .controversial {
+    color:yellow;
+}
+.medium {
+    color:red;
+}
+.low {
+    color:green;
+} */
+
+
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    top: 20px; left: 20px;
+  }
+  

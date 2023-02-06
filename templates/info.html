@@ -17,24 +17,37 @@
                   
         <form action="/notsafesnacks" method="POST">
 
-        <input type="hidden" value="{{data['title']}}" name="title" >
-        <input type="hidden" value="{{data['image']}}" name="image">
-        <input type="hidden" value="{{data['ingredientList']}}" name="ingredients">
+        <input type="hidden" value="{{data['title']}}" name="title" id="product-title" >
+        <input type="hidden" value="{{data['image']}}" name="image" id="product-image">
+        <input type="hidden" value="{{data['ingredientList']}}" name="ingredients" id="ingredients">
         <button class="b btn btn-danger" type="submit" name="saven"><i class="bi bi-emoji-frown"></i> | Not Safe List</button>
         </form>
 
-
-            <p><h4>{{data['title']}}</h4></p>
-            <p><img src="{{data['image']}}"></p> 
-            <p><h5>Ingredients: {{data['ingredientList']}}</h5></p>
-            <p>{{data['badges']}}</p> 
-            <p>{{data['importantBadges']}}</p> 
-            <p>{{data['nutrition']}}</p> 
-          
-            
+        <div id="products">
+            <div id="title-products"><h4>{{data['title']}}</h4><br></div>
+                <div id="image-products"><img src="{{data['image']}}"><br></div> 
+                    <div id="info-products" >
+                        <h5>Ingredients:
+                            {% for ingredient in data['ingredients']%}
+                            
+                            <span  id="info-product" value="{{ingredient.safety_level}}">{{ingredient.name}}</span>
+                                {% if not loop.last %}
+                                <span>,</span>
+                                {% endif %}
+                                {% endfor %} 
+                                </h5>
+                                    </div>
+                                    <p>{{data['badges']}}</p> 
+                                    <p>{{data['importantBadges']}}</p> 
+                                    <p>{{data['nutrition']}}</p> 
+                                    </div>
+    
          
-    {% endif %}
-
+                                {% endif %}
+                                    
+                                    <div class="tooltip">
+                                    <span id="tooltiptext" class="tooltiptextstyle">This ingredient is part of your dietary restrictions</span>
+                                    </div>
 
         
     <script src="/static/search-data.js"></script>

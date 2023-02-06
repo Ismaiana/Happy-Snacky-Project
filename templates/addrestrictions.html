@@ -5,30 +5,34 @@
 
 {% block body %}
 
-<form action="/addrestrictions" method="POST">
+<form action="/addrestrictions" method="POST" class="restrictions">
 
 
  
     <h3>Dietary Restrictions</h3>
  
-    <input type="checkbox" id="egg-free"  value="Egg free" name="restrictions">
-    <label for="egg_free"> Egg free</label><br>
-    <input type="checkbox" id="peanut-free"  value="Peanut free" name="restrictions">
+    <input type="checkbox" id="egg-free"  value="eggs" name="restrictions">
+    <label for="egg_free"> Egg Free</label><br>
+    <input type="checkbox" id="peanut-free"  value="peanuts" name="restrictions">
     <label for="peanut_free"> Peanut free</label><br>
-    <input type="checkbox" id="nut-free" value="Nut free" name="restrictions">
+    <input type="checkbox" id="nut-free" value="nut" name="restrictions">
     <label for="nut_free"> Nut free</label><br>
-    <input type="checkbox" id="soy-free" value="Soy free" name="restrictions">
+    <input type="checkbox" id="soy-free" value="soy" name="restrictions">
     <label for="soy_free"> Soy free</label><br>
-    <input type="checkbox" id="corn-free" value="Corn free" name="restrictions">
+    <input type="checkbox" id="corn-free" value="corn" name="restrictions">
     <label for="corn_free"> Corn free</label><br>
-    <input type="checkbox" id="sugar-free" value="Sugar free" name="restrictions">
+    <input type="checkbox" id="sugar-free" value="sugar" name="restrictions">
     <label for="sugar_free"> Sugar free</label><br>
-    <input type="checkbox" id="dairy-free" value="Dairy free" name="restrictions">
+    <input type="checkbox" id="dairy-free" value="dairy" name="restrictions">
     <label for="dairy_free"> Dairy free</label><br>
-    <input type="checkbox" id="gluten-free" value="Gluten free" name="restrictions">
+    <input type="checkbox" id="gluten-free" value="gluten" name="restrictions">
     <label for="gluten_free"> Gluten free</label><br>
-    <input type="checkbox" id="msg-free" value="Msg free" name="restrictions">
+    <input type="checkbox" id="msg-free" value="monosodium glutamate" name="restrictions">
     <label for="msg_free"> Msg free</label><br>
+    <input type="checkbox" id="salt-free" value="salt" name="restrictions">
+    <label for="msg_free"> Salt free</label><br>
+    <input type="checkbox" id="pork-free" value="pork" name="restrictions">
+    <label for="msg_free"> Pork free</label><br>
     <input type="checkbox" id="vegan" value="Animal free" name="restrictions">
     <label for="vegan"> Animal free (Vegan Diet)</label><br>
     <input type="checkbox" id="vegetarian" value="Meat free" name="restrictions">
@@ -38,7 +42,14 @@
     <p>
     <input type="submit" value="Save">
     </p>
+    
+    <input type="submit" value="Remove">
 </form>
+
+    <form action="/removeRestrictions" method="POST" class="restrictions_delete">
+
+
+    </form>
 
 
     {% endblock %}

@@ -27,10 +27,10 @@ def get_restrictiondb(user):
 
     return Badingredient.query.filter_by(user_id=user).all()
 
-def remove_restrictions(user, dietary_restriction):
+def remove_restrictions(user):
 
 
-    return Badingredient.query.filter_by(user_id= user, dietary_restriction= dietary_restriction).all()
+    return Badingredient.query.filter_by(user_id= user).all()
     
 def create_savedsafe(user, title, image):
 

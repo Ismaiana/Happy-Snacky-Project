@@ -1,11 +1,39 @@
-document.querySelector('.a btn btn-success').addEventListener('click', () => {
+fetch('/restrictions')
+.then(response => response.json())
+.then(data => {
+    
+    listIngred = document.querySelectorAll('#info-product')
+    for (let i = 0; i < listIngred.length; i++){
+        if (data.includes(listIngred[i].innerHTML)){
+            listIngred[i].style.backgroundColor = 'red'
+            
+        }
+        
+    }
 
-    fetch(`https://api.spoonacular.com/food/products/{id}`)
-    .then((response) => response.json())
-    .then((result) => {
-        const dataSave = result.message;
-       
-        document.querySelector('#savedsnack')
-        .innerHTML(`<div>${dataSave}</div>`)
-    });
+    
+
 });
+        
+    
+
+//  listIngred.addEventListener('mousemove', function(evt) {
+
+//     if (listIngred[i] === 'red'){
+//         text();
+//     }
+//     else {
+//         hideText();
+//     }
+
+//  });
+
+//     function text() {
+//         document.querySelector('#tooltiptext').style.visibility = 'visible';
+//     }
+
+//     function hideText() {
+//         document.querySelector('#tooltiptext').style.visibility = 'hidden';
+//       }
+
+
