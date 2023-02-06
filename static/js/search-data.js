@@ -15,25 +15,12 @@ fetch('/restrictions')
 
 });
         
-    
 
-//  listIngred.addEventListener('mousemove', function(evt) {
+const ingRed = document.querySelector('data-bs-toggle');
 
-//     if (listIngred[i] === 'red'){
-//         text();
-//     }
-//     else {
-//         hideText();
-//     }
+ingRed.getAttribute('data-bs-toggle'); 
 
-//  });
+ingRed.setAttribute('data-bs-toggle', 'tooltip');
 
-//     function text() {
-//         document.querySelector('#tooltiptext').style.visibility = 'visible';
-//     }
-
-//     function hideText() {
-//         document.querySelector('#tooltiptext').style.visibility = 'hidden';
-//       }
 
 

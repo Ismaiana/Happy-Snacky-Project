@@ -30,7 +30,7 @@
                         <h5>Ingredients:
                             {% for ingredient in data['ingredients']%}
                             
-                            <span  id="info-product" value="{{ingredient.safety_level}}">{{ingredient.name}}</span>
+                            <span data-bs-placement="top" data-bs-title="Tooltip on top" id="info-product" value="{{ingredient.safety_level}}" title="This ingredient is part of your dietary restrictions">{{ingredient.name}}</span>
                                 {% if not loop.last %}
                                 <span>,</span>
                                 {% endif %}
@@ -45,10 +45,9 @@
          
                                 {% endif %}
                                     
-                                    <div class="tooltip">
-                                    <span id="tooltiptext" class="tooltiptextstyle">This ingredient is part of your dietary restrictions</span>
-                                    </div>
-
+                                
+                                    
+                        
         
     <script src="/static/search-data.js"></script>
 
