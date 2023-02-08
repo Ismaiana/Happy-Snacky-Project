@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Happy Snacky{% endblock %}
+{% block head%} <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 
+  {# If you want to use time scales, you have to import a date library and the Chart.js adapter #}
+  <script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0/dist/chartjs-adapter-luxon.min.js"></script>
+
+  {# randomColor: generate random colors #}
+  <script src="https://cdn.jsdelivr.net/npm/randomcolor@0.6.2/randomColor.js"></script>
+   {% endblock %}
 {% block body %}
 
       
@@ -22,7 +31,7 @@
         <input type="hidden" value="{{data['ingredientList']}}" name="ingredients" id="ingredients">
         <button class="b btn btn-danger" type="submit" name="saven"><i class="bi bi-emoji-frown"></i> | Not Safe List</button>
         </form>
-
+        <input type="hidden" value="{{data['id']}}" name="title" id="product-id" >
         <div id="products">
             <div id="title-products"><h4>{{data['title']}}</h4><br></div>
                 <div id="image-products"><img src="{{data['image']}}"><br></div> 
@@ -36,20 +45,43 @@
                                 {% endif %}
                                 {% endfor %} 
                                 </h5>
+                                </div>
+
+                                    <h5><div id="badges">
+                                        <i class="bi bi-info-square-fill" style="color:rgb(61, 216, 61)"></i> This product should be
+                                        {% for badge in data['badges'] %}
+                                            {{badge}}
+                                             {% if not loop.last %}
+                                             <span>,</span>
+                                             {% endif %}
+                                        {% endfor %}
+                                    </div></h5> 
+
+                                    <!-- <div id="impBadges">
+                                    {% for badges in data['importantBadges'] %}
+                                    {{badges}}
+                                    {% endfor %}
+                                    </div>  -->
+                                    <canvas id="myChart"></canvas>
+                                    
+<!--                                    
+                                    <div>
+                                
+                                    
+                                    <div id="nutrition">
+                                    {{data['nutrition']}}
                                     </div>
-                                    <p>{{data['badges']}}</p> 
-                                    <p>{{data['importantBadges']}}</p> 
-                                    <p>{{data['nutrition']}}</p> 
                                     </div>
-    
+                                </div>
+     -->
          
                                 {% endif %}
                                     
                                 
                                     
-                        
-        
-    <script src="/static/search-data.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/search-data.js"></script>
 
 
 

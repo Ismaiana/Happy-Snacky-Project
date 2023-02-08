@@ -99,7 +99,31 @@ def snack_info(id):
 
     data2 = response.json()
     
-    return render_template('info.html', data=data2)
+    return render_template('info.html', data=data2, id=id)
+
+
+
+@app.route('/nutrition-info/<id>')
+def data_json(id):
+    """Display info of searched snacks"""
+
+
+    parameters2 = {
+    "id": id,
+    
+    }
+
+    
+    headers = {
+        "X-RapidAPI-Key": app.Spoonacular_KEY,
+        "X-RapidAPI-Host": app.Host_KEY
+    }
+
+    response = requests.get(f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}", params=parameters2, headers=headers)
+
+    nutrition = response.json()
+    
+    return jsonify({'data': nutrition})
 
 
 @app.route('/register')
