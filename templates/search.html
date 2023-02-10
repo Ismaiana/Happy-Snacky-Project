@@ -2,39 +2,113 @@
 {% extends 'base.html' %}
 {% block title %}Happy Snacky{% endblock %}
 
-
-
+  
 {% block body %}    
 
 
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-
-<div class="main-search-input-wrap" >
-       
-    <form action="/search" method="POST">
-    <div class="main-search-input fl-wrap">
-        <h2><div class="main-search-input-item">
-            <input type="text" name="product"  id="results" value="" placeholder="Search Products...">             
-                <button class="main-search-button">Search</button>
-        </div></h2>
-        </div>
-    </form>
-    </div>
-
-    {% if data%}    
-        {% for product in data['products'] %}
-
-            <p> <a href="/info/{{product['id']}}">{{product['title']}}</a></p>
+<div class="product-search" >
   
-            <img src="{{product['image']}}">
-                
-            {% endfor %}
-    {% endif %}
+  <form action="/search" method="POST">  
+  
+  <!-- FORMAT -->
+  <div class="col-md-12">
+    <div class="grid search">
+      <div class="grid-body">
+        
+        <div class="row">
+         
+          <!-- FILTERS TITLE-->
+          <div class="col-md-3">
+            <h2 class="grid-title"><i class="bi bi-funnel"></i> Filters</h2>
+            <hr>
+          
+            <!-- FILTERS -->
+            <h4>By dietary restriction:</h4>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="sugar_free" name="restrictions-search"> Sugar Free</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="nut_free" name="restrictions-search"> Nut Free</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="peanut_free" name="restrictions-search"> Peanut Free</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="egg_free" name="restrictions-search"> Egg Free</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="soy_free" name="restrictions-search"> Soy Free</label>
+            </div>
 
-   
+            <div class="checkbox">
 
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="gluten_free" name="restrictions-search"> Gluten Free</label>
+              </div>
+              <label><input type="checkbox" class="check" value="msg_free" name="restrictions-search"> Msg Free</label>
+            </div>
+        
+            <div class="checkbox"><br>
+
+            <h4>By special diet:</h4>
+              <label><input type="checkbox" class="check" value="vegetarian" name="restrictions-search"> Vegetarian</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="vegan" name="restrictions-search"> Vegan</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" class="check" value="kosher" name="restrictions-search"> Kosher</label>
+            </div>
+          </div> 
+
+          <!-- RESULTS -->
+          <div class="col-md-9">
+           
+            
+            <h2><i class="bi bi-cup-straw"></i> Results</h2>
+            <hr>
+              
+          <!-- SEARCH BAR -->
+              <div class="main-search-input fl-wrap">
+                <h2><div class="main-search-input-item">
+                  <input type="text" name="product"  id="search-bar" value="" placeholder="Search Products...">             
+                    <button class="main-search-button">Search</button>
+                  </div></h2>
+                  </div>
+            
+              {% if data%}    
+                  {% for product in data['products'] %}
+            
+                    <p> <a href="/info/{{product['id']}}">{{product['title']}}</a></p>
+            
+                    <img src="{{product['image']}}">
+                          
+                  {% endfor %}
+              {% endif %}
+
+                <!-- FLASH MESSAGE FOR NO MATCH RESULTS  -->
+      
+
+                  {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                      {% for message in messages %}
+                        <strong>{{ message }}</strong>
+                       {% endfor %}
+                    {% endif %}
+                  {% endwith %}
+    
+            </div>
+          </div>
+         </div>
+       </div>
+      </div>
+    </form>
+  </div>
+
+      
 
     
-
 {% endblock %}
 

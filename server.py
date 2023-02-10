@@ -50,11 +50,15 @@ def find_snack():
 
         products = request.form.get('product')
 
-        
+        restriction_filters = request.form.getlist('restrictions-search')
+
+        print(restriction_filters)
         url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search"
 
         parameters = {
-            "query": products
+            "query": products,
+            "addProductInformation": 'true'
+            
             }
 
         headers = {
@@ -64,9 +68,24 @@ def find_snack():
 
         response = requests.request("GET", url, headers=headers, params=parameters)
 
+      
         response.raise_for_status()
 
         data = response.json()
+
+
+        product_data = data['products']
+        
+        filtered_product_data = []
+        # ????????
+        for product_index in range(len(product_data)):
+            if(set(restriction_filters).issubset(set(product_data[product_index]['importantBadges']))):
+                filtered_product_data.append(product_data[product_index])
+
+        if filtered_product_data == []:
+            flash('Your search parameters had no match results')
+
+        data['products'] = filtered_product_data
 
         return render_template('search.html', data=data, id=id)
 

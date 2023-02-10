@@ -48,7 +48,7 @@
                         <h6>Dietary Restrictions</h6>
                         {% for ing in restriction %}
                           {%if restriction%}
-                        <p class="text-muted">{{ing['dietary_restriction']}}</p>
+                        <div class="text-muted">{{ing['dietary_restriction']}}<br></div>
                           
                           {% endif %}
                         {% endfor %}

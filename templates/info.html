@@ -15,15 +15,17 @@
       
 
     {% if data%}    
+
+       <!-- GREEN SAVE BUTTON  -->
         <form action="/safesnacks" method="POST">
 
         <input type="hidden" value="{{data['title']}}" name="title" >
         <input type="hidden" value="{{data['image']}}" name="image">
         <button class="a btn btn-success" type="submit" name="saves"><i class="bi bi-bookmark-heart-fill"></i> | Save For Later</button>
 
-        
         </form>
-                  
+
+        <!-- RED SAVE BUTTON  -->         
         <form action="/notsafesnacks" method="POST">
 
         <input type="hidden" value="{{data['title']}}" name="title" id="product-title" >
@@ -31,6 +33,8 @@
         <input type="hidden" value="{{data['ingredientList']}}" name="ingredients" id="ingredients">
         <button class="b btn btn-danger" type="submit" name="saven"><i class="bi bi-emoji-frown"></i> | Not Safe List</button>
         </form>
+
+        <!-- DATA PRODUCT INFO -->    
         <input type="hidden" value="{{data['id']}}" name="title" id="product-id" >
         <div id="products">
             <div id="title-products"><h4>{{data['title']}}</h4><br></div>
@@ -44,42 +48,38 @@
                                 <span>,</span>
                                 {% endif %}
                                 {% endfor %} 
+                                {% endif %}
                                 </h5>
                                 </div>
-
-                                    <h5><div id="badges">
-                                        <i class="bi bi-info-square-fill" style="color:rgb(61, 216, 61)"></i> This product should be
-                                        {% for badge in data['badges'] %}
-                                            {{badge}}
-                                             {% if not loop.last %}
-                                             <span>,</span>
-                                             {% endif %}
-                                        {% endfor %}
-                                    </div></h5> 
-
-                                    <!-- <div id="impBadges">
-                                    {% for badges in data['importantBadges'] %}
-                                    {{badges}}
+                                <h5><div id="badges">
+                                    <i class="bi bi-info-square-fill" style="color:rgb(61, 216, 61)"></i> This product should be
+                                    {% for badge in data['importantBadges'] %}
+                                        {{badge}}
+                                      {% if not loop.last %}
+                                        <span>,</span>
+                                        {% endif %}
                                     {% endfor %}
-                                    </div>  -->
-                                    <canvas id="myChart"></canvas>
-                                    
-<!--                                    
-                                    <div>
-                                
-                                    
-                                    <div id="nutrition">
-                                    {{data['nutrition']}}
-                                    </div>
-                                    </div>
+
+
+                                     <!-- NUTRICIONAL INFO DATA IN JS CHART-->    
+                                    <p>Nutricional Information</p>
+
+                                </div></h5> 
+
+                                    <div  style="width:30%"> 
+                                    <canvas id="myChart" ></canvas>
+
                                 </div>
-     -->
-         
-                                {% endif %}
+                                    <div id="nutrient-table" style="border: 1px; color:black;">
                                     
-                                
-                                    
- 
+                                    {% for nutrient in data['nutrition']['nutrients']%}
+                        
+                                        <br>{{nutrient['name']}}: {{nutrient['amount']}}
+                                      
+                                        {% endfor %}
+                                   
+                                    </div>         
+                                </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/js/search-data.js"></script>
 
