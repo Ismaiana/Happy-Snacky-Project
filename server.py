@@ -97,7 +97,6 @@ def find_snack():
         return redirect('/')
 
 
-
 @app.route('/info/<id>')
 def snack_info(id):
     """Display info of searched snacks"""
@@ -119,7 +118,6 @@ def snack_info(id):
     data2 = response.json()
     
     return render_template('info.html', data=data2, id=id)
-
 
 
 @app.route('/nutrition-info/<id>')
@@ -237,8 +235,6 @@ def random_snack():
 
    
 
-
-
 @app.route('/addrestrictions', methods=['GET','POST'])
 def add_restrictions():
     """Allow user to add dietary restrictions"""
@@ -294,7 +290,7 @@ def remove_restriction():
 
    
     checked_restriction= request.form.getlist('remove-restrictions')
-    print(checked_restriction)
+  
     for restriction in checked_restriction:
 
         remove_restriction= crud.get_restriction(user.user_id, restriction)
@@ -304,7 +300,6 @@ def remove_restriction():
 
     return redirect('/profile')
    
-    
 
 
 
@@ -336,11 +331,9 @@ def show_snacks():
 
     email= session['user_email']
     user = crud.get_user_by_email(email)
-    saved_snacks = crud.get_safesnack(user.user_id)
-    not_safe= crud.get_notsafesnack(user.user_id)
+    saved_snacks = crud.get_safesnacks(user.user_id)
+    not_safe = crud.get_notsafesnacks(user.user_id)
     
-
-
 
     return render_template('savedsnacks.html', saved_snacks=saved_snacks, not_safe=not_safe)
 
@@ -349,14 +342,14 @@ def show_snacks():
 def saved_snacks():
     """Save snacks process for save for later snacks button"""
 
-    email= session['user_email']
+    email = session['user_email']
     user = crud.get_user_by_email(email)
 
 
    
-    title= request.form.get('title')
-    image= request.form.get('image')
-    save= crud.create_savedsafe(user.user_id, title, image)
+    title = request.form.get('title')
+    image = request.form.get('image')
+    save = crud.create_savedsafe(user.user_id, title, image)
     db.session.add(save)
     db.session.commit()
 
@@ -383,6 +376,50 @@ def not_safe():
 
     return redirect('/savedsnacks')
     
+
+@app.route('/remove_safesnacks', methods=['POST'])
+def remove_not_safe():
+    """Delete saved snack from safe list and db"""
+
+    email = session['user_email']
+ 
+    user = crud.get_user_by_email(email)
+
+
+   
+    safe_snacks= request.form.getlist('safe-delete')
+  
+    for snack in  safe_snacks:
+
+        remove_snack= crud.get_safesnack(user.user_id)
+        db.session.delete(remove_snack)
+        db.session.commit()
+
+
+    return redirect('/savedsnacks')
+
+
+@app.route('/remove_notsafesnacks', methods=['POST'])
+def remove_safe():
+    """Delete saved snack from not safe list and db"""
+
+    email = session['user_email']
+ 
+    user = crud.get_user_by_email(email)
+
+
+   
+    notsafe_snacks = request.form.getlist('not-safe-delete')
+  
+    for snack in notsafe_snacks:
+
+        remove_snack = crud.get_notsafesnack(user.user_id)
+        db.session.delete(remove_snack)
+        db.session.commit()
+
+
+    return redirect('/savedsnacks')
+
 
 @app.route('/logout')
 def process_logout():

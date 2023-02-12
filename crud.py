@@ -17,19 +17,21 @@ def create_restrictions(user, dietary_restriction):
     return restrictions
 
 
-
 def get_restrictions(user, dietary_restriction): 
    
 
     return Badingredient.query.filter_by(user_id= user, dietary_restriction= dietary_restriction).all()
 
+
 def get_restrictiondb(user):
 
     return Badingredient.query.filter_by(user_id=user).all()
 
+
 def get_restriction(user, dietary_restriction):
 
     return Badingredient.query.filter_by(user_id= user, dietary_restriction= dietary_restriction).first()
+
 
 def create_savedsafe(user, title, image):
 
@@ -37,9 +39,15 @@ def create_savedsafe(user, title, image):
 
     return safe_snacks
 
-def get_safesnack(user):
+
+def get_safesnacks(user):
 
     return Savedsafe.query.filter_by(user_id=user).all()
+
+def get_safesnack(user):
+
+    return Savedsafe.query.filter_by(user_id=user).first()
+
 
 def create_savednotsafe(user, title, image, ingredients):
 
@@ -47,15 +55,22 @@ def create_savednotsafe(user, title, image, ingredients):
 
     return notsafe_snacks
 
-def get_notsafesnack(user):
+
+def get_notsafesnacks(user):
 
     return Savednotsafe.query.filter_by(user_id=user).all()
+
+
+def get_notsafesnack(user):
+
+    return Savednotsafe.query.filter_by(user_id=user).first()
 
 
 def get_users():
     
 
     return User.query.all()
+
 
 def get_user_by_id(user_id):
     

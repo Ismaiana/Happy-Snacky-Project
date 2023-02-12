@@ -3,7 +3,7 @@
 
 {% block body %}
 
-
+ <form action="/remove_safesnacks" method="POST">
 <div class="form-row">
         <div class="form-group col-md-7">
 
@@ -14,11 +14,15 @@
         <p>{{saved_snack['title']}}</p>
         <img src="{{saved_snack['image']}}"><br>
 
-        <button type="button" class="btn btn-link" id="delete-safe">Delete</button>
+        <button type="submit" class="btn btn-link" id="delete-safe" name="safe-delete">Delete</button>
 {% endfor %}
 
 </div>
 </div>
+</form>
+
+
+<form action="/remove_notsafesnacks" method="POST">
 
 <div class="form-group col-md-5">
 
@@ -34,10 +38,10 @@
 
 
  
-        <button type="button" class="btn btn-link" id="delete-notsafe">Delete</button>
+        <button type="submit" class="btn btn-link" id="delete-notsafe" name="not-safe-delete">Delete</button>
 {% endfor %}
 </div>
-
+</form>
 
 <script src="/static/search-data.js"></script>
 
