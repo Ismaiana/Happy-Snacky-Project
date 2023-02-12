@@ -3,18 +3,27 @@
 
 {% block body %}
 
-<p><strong> SNACKS FOR LATER </strong></p>
+
+<div class="form-row">
+        <div class="form-group col-md-7">
+
+<strong> SNACKS FOR LATER </strong>
 {% for saved_snack in saved_snacks %}
 
 
         <p>{{saved_snack['title']}}</p>
-        <img src="{{saved_snack['image']}}">
+        <img src="{{saved_snack['image']}}"><br>
 
-
+        <button type="button" class="btn btn-link" id="delete-safe">Delete</button>
 {% endfor %}
 
+</div>
+</div>
 
-<p><strong> NOT SAFE FOR ME :( </strong></p>
+<div class="form-group col-md-5">
+
+      
+<strong> NOT SAFE FOR ME :( </strong>
 
 {% for snack in not_safe %}
 
@@ -25,8 +34,9 @@
 
 
  
-
+        <button type="button" class="btn btn-link" id="delete-notsafe">Delete</button>
 {% endfor %}
+</div>
 
 
 <script src="/static/search-data.js"></script>

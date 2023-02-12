@@ -2,7 +2,7 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-
+  <script src="/static/js/search-data.js"></script>
    {% with messages = get_flashed_messages() %}
       {% if messages %}
          {% for message in messages %}
@@ -42,40 +42,39 @@
                     <h6>Email</h6>
                     <p class="text-muted" name="email">{{email}}</p>
                     <div class="row pt-4">
-                      <div class="col-6 mb-4">
+                   
                         <div id="restrictions-user">
-                        <form action="/addrestrictions">
-                        <h6>Dietary Restrictions</h6>
+                          <form action="/addrestrictions">
+                        <h6>Dietary Restrictions  <input type="submit" value="New Restriction"> </h6>
+    
+                        </form>
+                        </div>
+                        <form action="/removerestrictions" method="POST">
+                        <div class="restrictions">
+              
                         {% for ing in restriction %}
-                          {%if restriction%}
-                        <div class="text-muted">{{ing['dietary_restriction']}}<br></div>
-                          
+                          {%if restriction%}              
+                          <input type="checkbox" value="{{ing['dietary_restriction']}}" name="remove-restrictions">
+                          {{ing['dietary_restriction']}} <br>
                           {% endif %}
-                        {% endfor %}
-                      
-
+                        {% endfor %} 
+                        </div>
                         
-                        <input type="submit" value="Edit Restrictions ">
-
-                        <form action="/removeRestrictions">
-
-                          
-                        <input type="submit" value="Remove Restrictions">
-
-                      </form>
-
-                      </form>
-                    </div>
-               
+                        <br><button type="submit" value="Remove Restriction" id="remove-restriction">Remove Restriction</button>
+                        </form>
+                      </div>
+                        <script src="/static/js/search-data.js"></script>
+                     
+                      </div>
                     </div>
                     </div>
+                   </div>
                   </div>
+                 </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </section>      
+           
+    </section>   
+
 
 
   

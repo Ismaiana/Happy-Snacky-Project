@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Happy Snacky{% endblock %}
-{% block head%} <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+{% block head%} 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 
   {# If you want to use time scales, you have to import a date library and the Chart.js adapter #}
@@ -16,7 +17,7 @@
 
     {% if data%}    
 
-       <!-- GREEN SAVE BUTTON  -->
+       <!-- GREEN SAVE BUTTON/SAFE LIST  -->
         <form action="/safesnacks" method="POST">
 
         <input type="hidden" value="{{data['title']}}" name="title" >
@@ -25,7 +26,7 @@
 
         </form>
 
-        <!-- RED SAVE BUTTON  -->         
+        <!-- RED SAVE BUTTON/ NOT SAFE LIST  -->         
         <form action="/notsafesnacks" method="POST">
 
         <input type="hidden" value="{{data['title']}}" name="title" id="product-title" >
@@ -61,7 +62,7 @@
                                     {% endfor %}
 
 
-                                     <!-- NUTRICIONAL INFO DATA IN JS CHART-->    
+                                     <!-- NUTRICIONAL INFO DATA JS CHART/ TABLE-->    
                                     <p>Nutricional Information</p>
 
                                 </div></h5> 

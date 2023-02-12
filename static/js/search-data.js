@@ -43,17 +43,13 @@ const id = document.querySelector('#product-id').value
 fetch(`/nutrition-info/${id}`)
 .then((response) => response.json())
 .then(responseJson => {
-    // console.log('hello')
+  
     
     console.log(responseJson)
 
     const nutrients = responseJson.data.nutrition['nutrients']
 
-    // const data= responseJson.data.nutrition['nutrients'].map((nutri) => ({
-    //     x:nutri.name,
-    //     y:nutri.amount,
-    // }));
-   
+  
     let names = []
     let amounts = []
 
@@ -80,3 +76,8 @@ fetch(`/nutrition-info/${id}`)
 
 
 
+const removeRestrictions = document.querySelector('#remove-restriction');
+removeRestrictions.addEventListener('click', (evt) => { evt.preventDefault();
+
+
+  });

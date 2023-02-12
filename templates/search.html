@@ -36,11 +36,18 @@
               <label><input type="checkbox" class="check" value="peanut_free" name="restrictions-search"> Peanut Free</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" class="check" value="egg_free" name="restrictions-search"> Egg Free</label>
-            </div>
-            <div class="checkbox">
               <label><input type="checkbox" class="check" value="soy_free" name="restrictions-search"> Soy Free</label>
             </div>
+            <div class="checkbox">
+            <label><input type="checkbox" class="check" value="dairy_free" name="restrictions-search"> Lactose Free</label>
+            </div>
+            <div class="checkbox">
+            <label><input type="checkbox" class="check" value="egg_free" name="restrictions-search"> Egg Free</label>
+            </div>
+            <div class="checkbox">
+            <label><input type="checkbox" class="check" value="corn_free" name="restrictions-search"> Corn Free</label>
+            </div>
+          
 
             <div class="checkbox">
 
@@ -49,6 +56,7 @@
               </div>
               <label><input type="checkbox" class="check" value="msg_free" name="restrictions-search"> Msg Free</label>
             </div>
+            
         
             <div class="checkbox"><br>
 
@@ -94,8 +102,8 @@
                   {% with messages = get_flashed_messages() %}
                    {% if messages %}
                       {% for message in messages %}
-                        <strong>{{ message }}</strong>
-                       {% endfor %}
+                       <strong>{{ message }}</strong>
+                      {% endfor %}
                     {% endif %}
                   {% endwith %}
     

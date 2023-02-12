@@ -83,7 +83,7 @@ def find_snack():
                 filtered_product_data.append(product_data[product_index])
 
         if filtered_product_data == []:
-            flash('Your search parameters had no match results')
+            flash('Your search parameters had no match results.')
 
         data['products'] = filtered_product_data
 
@@ -251,7 +251,7 @@ def add_restrictions():
     if request.method == 'POST':
         dietary_restrictions = request.form.getlist('restrictions')
         for dietary_restriction in dietary_restrictions:
-            get_restriction = crud.get_restriction(user.user_id, dietary_restriction)
+            get_restriction = crud.get_restrictions(user.user_id, dietary_restriction)
             if get_restriction == []:
                 restrictions = crud.create_restrictions(user.user_id, dietary_restriction)
                 db.session.add(restrictions)
@@ -264,7 +264,7 @@ def add_restrictions():
 
 @app.route('/restrictions')
 def restrictions():
-    """Display info of searched snacks"""
+    """Jsonified data base restrictions"""
 
     email = session['user_email']
  
@@ -283,7 +283,7 @@ def restrictions():
     
     return jsonify(restriction_data)
 
-@app.route('/removerestriction', methods=['POST'])
+@app.route('/removerestrictions', methods=['POST'])
 def remove_restriction():
     """remove restriction from data base and user profile"""
 
@@ -291,14 +291,20 @@ def remove_restriction():
  
     user = crud.get_user_by_email(email)
 
-    restrictions = request.form.get('removeRestrictions')
 
-    remove_ing = crud.remove_restrictions(user.user_id)
+   
+    checked_restriction= request.form.getlist('remove-restrictions')
+    print(checked_restriction)
+    for restriction in checked_restriction:
 
-    db.session.delete(remove_ing)
-    db.session.commit()
+        remove_restriction= crud.get_restriction(user.user_id, restriction)
+        db.session.delete(remove_restriction)
+        db.session.commit()
+
 
     return redirect('/profile')
+   
+    
 
 
 
