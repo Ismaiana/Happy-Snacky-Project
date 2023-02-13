@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Discussions{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<!-- FORM FOR FORUM PAGE  -->
+
+<form action="/forum" class="login-form">
+
+
+    <div class="container">
+        <div class="forum-rules">
+            <div class="forum-title">
+                <h1><i class="bi bi-lightbulb"> </i>FORUM</h1>
+            </div>
+            <div class="forum-row">
+                <div class="forum-column center">
+    
+                </div>
+                <div class="forum-description forum-column">
+                    <h4><a href="/forum_rules"><p>FORUM RULES</p></a></h4>
+        </div>
+
+        <div class="forum">
+            <div class="forum-title">
+            </div>
+            <hr class="forum-devider">
+            <h1>THREADS</h1><br>
+            <div class="forum-row">
+                <div class="forum-column center">
+                </div>
+                <div class="forum-description subforum-column">
+                    <h4> <i class="bi bi-lightbulb"></i> <a href="#">General Discussion </a></h4>
+                    <p>General discussion, us.</p>
+                </div>
+                <div class="forum-column center">
+                    <span>0 Posts | 0 Topics</span>
+                </div>
+                <div class="forum-column">
+                    <b><a href="">Last post</a></b> by <a href="">User</a> 
+                    <br>on <small>Date</small>
+                </div>
+            </div>
+            </div>
+            <div class="forum">
+                <div class="forum-row">
+                    <div class="forum-column center">
+                    </div>
+                    <div class="forum-column">
+                        <h4><i class="bi bi-lightbulb"></i> <a href="#">Products Recomedations</a></h4>
+                        <p>General discussion, us.</p>
+                    </div>
+                    <div class="forum-column center">
+                        <span>0 Posts | 0 Topics</span>
+                    </div>
+                    <div class="forum-column">
+                        <b><a href="">Last post</a></b> by <a href="">User</a> 
+                        <br>on <small>date</small>
+                    </div>
+                </div>
+                </div>
+
+            <div class="forum-column center">
+    
+            </div>
+            <div class="forum-column">
+                <h4><i class="bi bi-lightbulb"></i> <a href="#">Products/Bugs report</a></h4>
+                <p>General discussion, us.</p>
+            </div>
+            <div class="forum-column center">
+                <span>0 Posts | 0 Topics</span>
+            </div>
+            <div class="forum-column">
+                <b><a href="">Last post</a></b> by <a href="">User</a> 
+                <br>on <small>date</small>
+            </div>
+        </div>
+        
+        
+    </form>
+
+
+    <script src="main.js"></script>
+
+    
+
+
+    {% endblock %}

@@ -2,6 +2,7 @@
 
 
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from passlib.hash import argon2
 from model import connect_to_db, db
 import os
 import crud
@@ -25,6 +26,14 @@ def homepage():
 
 
     return render_template('homepage.html')
+
+
+@app.route('/about')
+def about():
+    """display about page"""
+
+
+    return render_template('about.html')
 
 
 @app.route('/search')
@@ -53,20 +62,21 @@ def find_snack():
         restriction_filters = request.form.getlist('restrictions-search')
 
         print(restriction_filters)
-        url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search"
+        url = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search'
 
         parameters = {
-            "query": products,
-            "addProductInformation": 'true'
+            'query': products,
+            'addProductInformation': 'true',
+            'number': '25'
             
             }
 
         headers = {
-            "X-RapidAPI-Key": app.Spoonacular_KEY,
-            "X-RapidAPI-Host": app.Host_KEY
+            'X-RapidAPI-Key': app.Spoonacular_KEY,
+            'X-RapidAPI-Host': app.Host_KEY
         }
 
-        response = requests.request("GET", url, headers=headers, params=parameters)
+        response = requests.request('GET', url, headers=headers, params=parameters)
 
       
         response.raise_for_status()
@@ -77,8 +87,9 @@ def find_snack():
         product_data = data['products']
         
         filtered_product_data = []
-        # ????????
+     
         for product_index in range(len(product_data)):
+
             if(set(restriction_filters).issubset(set(product_data[product_index]['importantBadges']))):
                 filtered_product_data.append(product_data[product_index])
 
@@ -97,23 +108,52 @@ def find_snack():
         return redirect('/')
 
 
+@app.route('/search', methods=['POST'])
+def autocomplete():
+    """Autocomplete search feature"""
+
+    products = request.form.get('product')
+
+    url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/suggest"
+
+    parameters = {'query':products,
+                  'number': '25'  
+    }
+
+    headers = {
+
+        'X-RapidAPI-Key': app.Spoonacular_KEY,
+        'X-RapidAPI-Host': app.Host_KEY
+    }
+
+
+    response = requests.request("GET", url, headers=headers, params=parameters)
+
+    response.raise_for_status()
+
+    autocomplete_data = response.json()
+
+
+    return render_template('search.html', data=autocomplete_data)
+
+
 @app.route('/info/<id>')
 def snack_info(id):
     """Display info of searched snacks"""
 
 
     parameters2 = {
-    "id": id,
+    'id': id,
     
     }
 
     
     headers = {
-        "X-RapidAPI-Key": app.Spoonacular_KEY,
-        "X-RapidAPI-Host": app.Host_KEY
+        'X-RapidAPI-Key': app.Spoonacular_KEY,
+        'X-RapidAPI-Host': app.Host_KEY
     }
 
-    response = requests.get(f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}", params=parameters2, headers=headers)
+    response = requests.get(f'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}', params=parameters2, headers=headers)
 
     data2 = response.json()
     
@@ -126,17 +166,17 @@ def data_json(id):
 
 
     parameters2 = {
-    "id": id,
+    'id': id,
     
     }
 
     
     headers = {
-        "X-RapidAPI-Key": app.Spoonacular_KEY,
-        "X-RapidAPI-Host": app.Host_KEY
+        'X-RapidAPI-Key': app.Spoonacular_KEY,
+        'X-RapidAPI-Host': app.Host_KEY
     }
 
-    response = requests.get(f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}", params=parameters2, headers=headers)
+    response = requests.get(f'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}', params=parameters2, headers=headers)
 
     nutrition = response.json()
     
@@ -163,6 +203,8 @@ def user_registration():
 
     user = crud.get_user_by_email(email)
 
+    hashed = argon2.hash(password)
+
 
     if user:
         flash('This email adress is already being used.')
@@ -170,7 +212,7 @@ def user_registration():
         return redirect('/register')
 
     else:
-        user = crud.create_user(email, password, fname, lname)
+        user = crud.create_user(email, hashed, fname, lname)
         db.session.add(user)
         db.session.commit()
         flash('Account created with sucess! Please log in to your account.')
@@ -187,13 +229,13 @@ def login_form():
     password = request.form.get('password')
 
     user = crud.get_user_by_email(email)
+    hashed = argon2.hash(password)
    
-   
-    if not user or user.password != password:
+    if not user or user.password != hashed:
 
         flash('The email or password you entered was incorrect.')
 
-        return redirect("/")
+        return redirect('/')
         
     else:
 
@@ -209,7 +251,6 @@ def random_snack():
 
 
     filters= request.form.getlist('restrictions2')
-    print(filters)
 
     parameters = {
     'apiKey': app.Spoonacular_KEY,
@@ -217,8 +258,8 @@ def random_snack():
     }
 
     headers = {
-     "X-RapidAPI-Key": app.Spoonacular_KEY,
-     "X-RapidAPI-Host": app.Host_KEY
+     'X-RapidAPI-Key': app.Spoonacular_KEY,
+     'X-RapidAPI-Host': app.Host_KEY
     }
 
     response = requests.get('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search', params=parameters, headers=headers)
@@ -233,25 +274,28 @@ def random_snack():
 
     return render_template('homepage.html', data=random_snack)
 
-   
 
 @app.route('/addrestrictions', methods=['GET','POST'])
 def add_restrictions():
     """Allow user to add dietary restrictions"""
 
    
-    email= session['user_email']
+    email = session['user_email']
     user = crud.get_user_by_email(email)
    
         
     if request.method == 'POST':
         dietary_restrictions = request.form.getlist('restrictions')
+
         for dietary_restriction in dietary_restrictions:
+
             get_restriction = crud.get_restrictions(user.user_id, dietary_restriction)
+
             if get_restriction == []:
                 restrictions = crud.create_restrictions(user.user_id, dietary_restriction)
                 db.session.add(restrictions)
                 db.session.commit()
+
         return redirect('/profile')
   
 
@@ -260,7 +304,7 @@ def add_restrictions():
 
 @app.route('/restrictions')
 def restrictions():
-    """Jsonified data base restrictions"""
+    """Jsonified data from table restrictions"""
 
     email = session['user_email']
  
@@ -289,18 +333,26 @@ def remove_restriction():
 
 
    
-    checked_restriction= request.form.getlist('remove-restrictions')
+    checked_restriction = request.form.getlist('remove-restrictions')
   
     for restriction in checked_restriction:
 
-        remove_restriction= crud.get_restriction(user.user_id, restriction)
+        remove_restriction = crud.get_restriction(user.user_id, restriction)
         db.session.delete(remove_restriction)
         db.session.commit()
 
 
     return redirect('/profile')
    
+@app.route('/forum')
+def forum():
 
+    return render_template('forum.html')
+
+@app.route('/forum_rules')
+def forum_rules():
+
+    return render_template('forum_rules.html')
 
 
 @app.route('/profile')
@@ -327,7 +379,7 @@ def user_profile():
 
 @app.route('/savedsnacks')
 def show_snacks():
-    """display saved snacks"""
+    """Display saved snacks"""
 
     email= session['user_email']
     user = crud.get_user_by_email(email)
@@ -357,7 +409,6 @@ def saved_snacks():
     return redirect('/savedsnacks')
     
 
-
 @app.route('/notsafesnacks', methods=['GET', 'POST'])
 def not_safe():
     """Save snacks process for not safe snacks button"""
@@ -367,10 +418,10 @@ def not_safe():
 
 
    
-    title= request.form.get('title')
-    image= request.form.get('image')
-    ingredients= request.form.get('ingredients')
-    save_notsafe= crud.create_savednotsafe(user.user_id, title, image, ingredients)
+    title = request.form.get('title')
+    image = request.form.get('image')
+    ingredients = request.form.get('ingredients')
+    save_notsafe = crud.create_savednotsafe(user.user_id, title, image, ingredients)
     db.session.add(save_notsafe)
     db.session.commit()
 
@@ -387,11 +438,11 @@ def remove_not_safe():
 
 
    
-    safe_snacks= request.form.getlist('safe-delete')
+    safe_snacks = request.form.getlist('safe-delete')
   
     for snack in  safe_snacks:
 
-        remove_snack= crud.get_safesnack(user.user_id)
+        remove_snack = crud.get_safesnack(user.user_id)
         db.session.delete(remove_snack)
         db.session.commit()
 
