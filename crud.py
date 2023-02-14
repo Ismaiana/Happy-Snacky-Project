@@ -1,6 +1,6 @@
 """Crud functions"""
 
-from model import db, User, Badingredient, Savedsafe, Savednotsafe, connect_to_db
+from model import db, User, Badingredient, Savedsafe, Savednotsafe, ForumDiscussions, ForumRecommendations, ForumReports, connect_to_db
 
 
 def create_user(email, password, fname, lname):
@@ -8,6 +8,30 @@ def create_user(email, password, fname, lname):
     user = User(email=email, password=password, fname=fname, lname=lname)
 
     return user
+
+
+def create_comment_1(user, comments):
+
+    discussions = ForumDiscussions(user_id=user, comments=comments)
+
+
+    return discussions
+
+def create_comment_2(user, comments):
+
+    recommendations = ForumRecommendations(user_id=user, comments=comments)
+
+
+    return recommendations
+
+
+def create_comment_3(user, comments):
+
+    reports = ForumReports(user_id=user, comments=comments)
+
+
+    return reports
+
 
 
 def create_restrictions(user, dietary_restriction):

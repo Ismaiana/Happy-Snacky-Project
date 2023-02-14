@@ -346,13 +346,55 @@ def remove_restriction():
    
 @app.route('/forum')
 def forum():
+    """Display forum page"""
 
     return render_template('forum.html')
 
 @app.route('/forum_rules')
 def forum_rules():
+    """Display forum rules"""
 
     return render_template('forum_rules.html')
+
+@app.route('/forum_comments')
+def create_comment():
+    """Create comments for forum discussions"""
+
+
+
+
+    comment = crud.create_comment_1(user.user_id, comments)
+    db.session.add(comment)
+    db.session.commit()
+
+    return render_template('discussions.html')
+
+@app.route('/forum_comments')
+def create_comment():
+    """Create comments for forum recommendations"""
+
+
+
+
+    comment = crud.create_comment_1(user.user_id, comments)
+    db.session.add(comment)
+    db.session.commit()
+
+    return render_template('discussions.html')
+
+
+@app.route('/forum_comments')
+def create_comment():
+    """Create comments for forum reports"""
+
+
+
+
+    comment = crud.create_comment_1(user.user_id, comments)
+    db.session.add(comment)
+    db.session.commit()
+
+    return render_template('discussions.html')
 
 
 @app.route('/profile')

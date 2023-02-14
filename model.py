@@ -18,6 +18,9 @@ class User(db.Model):
     restrictions = db.relationship('Badingredient', back_populates='user')
     savedsafe = db.relationship('Savedsafe', back_populates='user')
     savednotsafe = db.relationship('Savednotsafe', back_populates='user')
+    forumdiscussions= db.relationship('ForumDiscussions', back_populates='user')
+    forumrecommendations= db.relationship('ForumRecommendations', back_populates='user')
+    forumreports= db.relationship('ForumReports', back_populates='user')
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
@@ -68,6 +71,49 @@ class Savednotsafe(db.Model):
     def __repr__(self): 
         return f'<Savednotsafe nsnack_id={self.snack_id} title={self.title}>'
 
+class ForumDiscussions(db.Model):
+    
+    __tablename__ = 'discussions'
+
+    discussion_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    comments= db.Column(db.String(250))
+
+    user = db.relationship('User', back_populates='forumdiscussions')
+
+
+    def __repr__(self): 
+        return f'<forumDiscussions discussion_id={self.discussion_id} comments{self.comments}>'
+
+
+class ForumRecommendations(db.Model):
+
+    __tablename__ = 'recommendations'
+
+    discussion_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    comments = db.Column(db.String(250))
+
+    user = db.relationship('User', back_populates='forumrecommendations')
+
+
+    def __repr__(self): 
+        return f'<forumRecommendations discussion_id={self.discussion_id} comments{self.comments}>'
+
+
+class ForumReports(db.Model):
+
+    __tablename__ = 'reports'
+
+    discussion_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id= db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    comments= db.Column(db.String(250))
+
+    user = db.relationship('User', back_populates='forumreports')
+
+
+    def __repr__(self): 
+        return f'<forumReport discussion_id={self.discussion_id} comments{self.comments}>'
 
 
 
