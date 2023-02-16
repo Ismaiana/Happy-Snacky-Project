@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}avatars{% endblock %}
+
+{% block body %}
+
+<form action="/avatars_db" class="select-avatars" method="POST" >
+
+<input type="radio" class="btn-check" name="avatars" value="/static/img/beige-egg.png" id="beige-egg" autocomplete="off">
+<label class="btn btn-outline-primary" for="beige-egg"> <img src="/static/img/beige-egg.png" style="width: 80px;"> </label>
+
+<input type="radio" class="btn-check" name="avatars" value="/static/img/blue-egg.png" id="blue-egg" autocomplete="off">
+<label class="btn btn-outline-primary" for="blue-egg"> <img src="/static/img/blue-egg.png" style="width: 80px;"> </label>
+
+<input type="radio" class="btn-check" name="avatars" value="/static/img/orange-egg.png" id="orange-egg" autocomplete="off">
+<label class="btn btn-outline-primary" for="orange-egg"> <img src="/static/img/orange-egg.png" style="width: 80px;"> </label>
+
+<input type="radio" class="btn-check" name="avatars" value="/static/img/pink-egg.png" id="pink-egg" autocomplete="off">
+<label class="btn btn-outline-primary" for="pink-egg"> <img src="/static/img/pink-egg.png" style="width: 80px;"> </label>
+
+<input type="radio" class="btn-check" name="avatars" value="/static/img/purple-egg.png" id="purple-egg" autocomplete="off">
+<label class="btn btn-outline-primary" for="purple-egg"> <img src="/static/img/purple-egg.png" style="width: 80px;"> </label>
+
+<br>
+<input type="submit" value="Save">
+</form>
+
+
+
+{% endblock %}

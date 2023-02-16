@@ -16,14 +16,22 @@
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-left align-items-left h-100">
           <div class="col col-lg-6 mb-4 mb-lg-0">
-            <div class="card mb-3" style="border-radius: .9rem;">
+           <div class="card mb-3" style="border-radius: .9rem;">
               <div class="row g-0">
                 <div class="col-md-4 gradient-custom text-center text-white"
                   style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                  <img src="/static/img/purple-egg.png"
+                 
+               
+                  {% if avatar %}
+                  <img src="{{avatar['avatar']}}"
+                  
                     alt="profile-pic" class="img-fluid my-5" style="width: 110px;" />
-                    <button type="submit" class="btn btn-link" id="change-avatar" name="avatar">Change Avatar</button>
+                    {% endif %}
+                  
+                  
 
+                    <button class="btn btn-link" id="change-avatar" name="avatar"><a href="/avatars">Change Avatar</a></button>
+                  
                   <i class="far fa-edit mb-5"></i>
                 </div>
                 <div class="col-md-8">
@@ -73,13 +81,14 @@
                   </div>
                  </div>
                 </div>
-           
+         
     </section>   
 
 
 
   
-
+<input type="radio" class="btn-check" name="avatars" value="1" id="beige-egg" autocomplete="off">
+<label class="btn btn-outline-primary" for="beige-egg"> <img src="/static/img/beige-egg.png"> </label>
 
 
 

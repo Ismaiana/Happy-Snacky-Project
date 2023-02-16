@@ -15,15 +15,32 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     
+    
     restrictions = db.relationship('Badingredient', back_populates='user')
     savedsafe = db.relationship('Savedsafe', back_populates='user')
     savednotsafe = db.relationship('Savednotsafe', back_populates='user')
-    forumdiscussions= db.relationship('ForumDiscussions', back_populates='user')
-    forumrecommendations= db.relationship('ForumRecommendations', back_populates='user')
-    forumreports= db.relationship('ForumReports', back_populates='user')
+    forumdiscussions = db.relationship('ForumDiscussions', back_populates='user')
+    forumrecommendations = db.relationship('ForumRecommendations', back_populates='user')
+    forumreports = db.relationship('ForumReports', back_populates='user')
+    avatars = db.relationship('Avatar', back_populates='user')
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.email}>'
+        return f'<User user_id={self.user_id} email={self.email} fname={self.fname}>'
+    
+
+class Avatar(db.Model):
+
+    __tablename__ = 'avatars'
+
+    avatar_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    avatar = db.Column(db.String)
+
+
+    user = db.relationship('User', back_populates='avatars')
+
+    def __repr__(self):
+        return f'<Avatar avatar_id={self.avatar_id} avatar={self.avatar}>'
 
 
 class Badingredient(db.Model):

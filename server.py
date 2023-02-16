@@ -61,7 +61,6 @@ def find_snack():
 
         restriction_filters = request.form.getlist('restrictions-search')
 
-        print(restriction_filters)
         url = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search'
 
         parameters = {
@@ -108,39 +107,12 @@ def find_snack():
         return redirect('/')
 
 
-@app.route('/search', methods=['POST'])
-def autocomplete():
-    """Autocomplete search feature"""
-
-    products = request.form.get('product')
-
-    url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/suggest"
-
-    parameters = {'query':products,
-                  'number': '25'  
-    }
-
-    headers = {
-
-        'X-RapidAPI-Key': app.Spoonacular_KEY,
-        'X-RapidAPI-Host': app.Host_KEY
-    }
-
-
-    response = requests.request("GET", url, headers=headers, params=parameters)
-
-    response.raise_for_status()
-
-    autocomplete_data = response.json()
-
-
-    return render_template('search.html', data=autocomplete_data)
-
 
 @app.route('/info/<id>')
 def snack_info(id):
     """Display info of searched snacks"""
 
+    exceptions = ['menu item type','non food item', 'snack', 'topping']
 
     parameters2 = {
     'id': id,
@@ -154,10 +126,23 @@ def snack_info(id):
     }
 
     response = requests.get(f'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/{id}', params=parameters2, headers=headers)
-
-    data2 = response.json()
     
-    return render_template('info.html', data=data2, id=id)
+
+    product_info_data = response.json()
+    
+    
+    cleaner_product_info_data = []
+    
+    for ingredient_index in range(len(product_info_data['ingredients'])):
+        if product_info_data['ingredients'][ingredient_index]['name'] in exceptions:
+            # print(product_info_data['ingredients'][ingredient_index]['name'])
+            pass
+        else:
+            cleaner_product_info_data.append(product_info_data['ingredients'][ingredient_index])
+
+    product_info_data['ingredients'] = cleaner_product_info_data
+
+    return render_template('info.html', data=product_info_data, id=id)
 
 
 @app.route('/nutrition-info/<id>')
@@ -204,7 +189,8 @@ def user_registration():
     user = crud.get_user_by_email(email)
 
     hashed = argon2.hash(password)
-
+    print(password)
+    print(hashed)
 
     if user:
         flash('This email adress is already being used.')
@@ -227,11 +213,11 @@ def login_form():
 
     email = request.form.get('email')
     password = request.form.get('password')
-
+    
     user = crud.get_user_by_email(email)
-    hashed = argon2.hash(password)
+    
    
-    if not user or user.password != hashed:
+    if not user or not argon2.verify(password, user.password):
 
         flash('The email or password you entered was incorrect.')
 
@@ -356,46 +342,134 @@ def forum_rules():
 
     return render_template('forum_rules.html')
 
-@app.route('/forum_comments')
-def create_comment():
+
+@app.route('/discussions')
+def discussions_forum():
+    """Display discussions forum"""
+
+    
+
+    comments = crud.get_all_discussions()
+   
+
+    return render_template('discussions.html', comments=comments)
+
+
+@app.route('/forum_comments_discussions')
+def comment_discussions():
     """Create comments for forum discussions"""
 
+    email = session['user_email']
 
+    user = crud.get_user_by_email(email)
 
-
-    comment = crud.create_comment_1(user.user_id, comments)
+    comments = request.args.get('comment_dis')
+                                
+    comment = crud.create_comment_discussions(user.user_id, comments)
     db.session.add(comment)
     db.session.commit()
 
-    return render_template('discussions.html')
 
-@app.route('/forum_comments')
-def create_comment():
+    return redirect('/discussions')
+
+
+@app.route('/recommendations')
+def recommendations_forum():
+    """Display recommendations forum"""
+
+    
+
+    comments = crud.get_all_recommendations()
+   
+
+    return render_template('recommendations.html',comments=comments)
+
+
+
+@app.route('/forum_comments_recommendations')
+def comment_recommendations():
     """Create comments for forum recommendations"""
 
+    email = session['user_email']
 
+    user = crud.get_user_by_email(email)
 
+    comments = request.args.get('comment_rec')
 
-    comment = crud.create_comment_1(user.user_id, comments)
+    comment = crud.create_comment_recommendations(user.user_id, comments)
     db.session.add(comment)
     db.session.commit()
 
-    return render_template('discussions.html')
+
+    return redirect('/recommendations')
 
 
-@app.route('/forum_comments')
-def create_comment():
+@app.route('/reports')
+def reports_forum():
+    """Display reports forum"""
+
+    
+
+    comments = crud.get_all_reports()
+   
+
+    return render_template('reports.html', comments=comments)
+
+
+@app.route('/forum_comments_reports')
+def comment_reports():
     """Create comments for forum reports"""
 
+    email = session['user_email']
 
+    user = crud.get_user_by_email(email)
 
-
-    comment = crud.create_comment_1(user.user_id, comments)
+    comments = request.args.get('comment_rep')
+                                
+    comment = crud.create_comment_reports(user.user_id, comments)
     db.session.add(comment)
     db.session.commit()
 
-    return render_template('discussions.html')
 
+    return redirect('/reports')
+
+
+@app.route('/avatars')
+def show_avatars():
+    """Allows user to select avatar"""
+
+
+    return render_template('avatars.html')
+
+
+@app.route('/avatars_db', methods=['GET', 'POST'])
+def create_avatars():
+    """Send selected avatar to db"""
+
+    email = session['user_email']
+
+    user = crud.get_user_by_email(email)
+    
+
+       
+    selected_avatar = request.form.get('avatars')
+
+    avatar = crud.get_avatardb(user.user_id)
+    if avatar is None:
+
+        added_avatar = crud.add_avatar(user.user_id, selected_avatar)
+
+        db.session.add(added_avatar)
+        db.session.commit()
+    else: 
+        upsert_row = crud.get_avatardb(user.user_id)
+        upsert_row.avatar = selected_avatar
+        
+        db.session.commit()
+
+
+    return redirect('/profile')
+     
 
 @app.route('/profile')
 def user_profile():
@@ -409,9 +483,11 @@ def user_profile():
         user = crud.get_user_by_email(email)
         
         restriction = crud.get_restrictiondb(user.user_id)
+
+        avatar = crud.get_avatardb(user.user_id)
     
         
-        return render_template('profile.html', email= user.email, fname= user.fname, lname= user.lname, restriction=restriction)
+        return render_template('profile.html',email= user.email, fname= user.fname, lname= user.lname, restriction=restriction, avatar=avatar)
 
     else:
 

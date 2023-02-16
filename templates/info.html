@@ -33,7 +33,7 @@
         <input type="hidden" value="{{data['image']}}" name="image" id="product-image">
         <input type="hidden" value="{{data['ingredientList']}}" name="ingredients" id="ingredients">
         <button class="b btn btn-danger" type="submit" name="saven"><i class="bi bi-emoji-frown"></i> | Not Safe List</button>
-        </form>
+        </form><br>
 
         <!-- DATA PRODUCT INFO -->    
         <input type="hidden" value="{{data['id']}}" name="title" id="product-id" >
@@ -44,7 +44,8 @@
                         <h5>Ingredients:
                             {% for ingredient in data['ingredients']%}
                             
-                            <span data-bs-placement="top" data-bs-title="Tooltip on top" id="info-product" value="{{ingredient.safety_level}}" title="This ingredient is part of your dietary restrictions">{{ingredient.name}}</span>
+                            <span data-bs-placement="top" data-bs-title="Tooltip on top" id="info-product" value="{{ingredient.safety_level}}" 
+                            title="This ingredient is part of your dietary restrictions">{{ingredient.name}}</span>
                                 {% if not loop.last %}
                                 <span>,</span>
                                 {% endif %}
@@ -52,20 +53,24 @@
                                 {% endif %}
                                 </h5>
                                 </div>
+
                                 <h5><div id="badges">
                                     <i class="bi bi-info-square-fill" style="color:rgb(61, 216, 61)"></i> This product should be
                                     {% for badge in data['importantBadges'] %}
-                                        {{badge}}
+
+                                        {{badge | replace("_", " ") }}
+
                                       {% if not loop.last %}
                                         <span>,</span>
                                         {% endif %}
                                     {% endfor %}
-
-
+                                 
+                                    </div>
+                                </h5> 
                                      <!-- NUTRICIONAL INFO DATA JS CHART/ TABLE-->    
-                                    <p>Nutricional Information</p>
+                                    <br><p><h4>Nutricional Information</h4></p>
 
-                                </div></h5> 
+                              
 
                                     <div  style="width:30%"> 
                                     <canvas id="myChart" ></canvas>
