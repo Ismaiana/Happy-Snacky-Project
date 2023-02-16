@@ -78,6 +78,10 @@ def create_comment_reports(user, comments):
 
     return reports
 
+def get_comment_report(user, comments):
+
+    return ForumReports.query.filter_by(user_id=user, comments=comments).first()
+
 
 def create_restrictions(user, dietary_restriction):
     

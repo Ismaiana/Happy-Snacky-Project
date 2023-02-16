@@ -9,7 +9,7 @@
 <div class="container">
     <div class="forum-rules">
         <div class="forum-title">
-            <h1><i class="bi bi-lightbulb"> </i>Recommendations</h1><br>
+            <h1><i class="bi bi-lightbulb"> </i>Discussions</h1><br>
         </div>
             {% if comments is defined %}
             {% for comment in comments %}
@@ -17,11 +17,12 @@
             <img src="{{comment.user.avatars[0].avatar}}" style="width: 60px;"/> <strong>{{comment.user.fname}}</strong><br>
                 
             {{comment.comments}}
-                
+            <br>
+            <button type="submit" class="btn btn-link" id="delete-dis" name="comment-delete">Delete</button>
             <hr class="forum-devider">
                     
             <br>
-    
+           
    {% endfor %}
     {% endif %}
 

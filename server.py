@@ -434,6 +434,24 @@ def comment_reports():
     return redirect('/reports')
 
 
+@app.route('/delete_comments_rep')
+def delete_comments():
+    """Button to delete comment in forums"""
+
+    email = session['user_email']
+
+    user = crud.get_user_by_email(email)
+
+    delete_button = request.args.get('comment-delete')
+    
+    remove_comment = crud.get_comment_report(user.user_id, delete_button)
+
+
+    db.session.delete(remove_comment)
+    db.session.commit()
+
+    return redirect('/reports')
+
 @app.route('/avatars')
 def show_avatars():
     """Allows user to select avatar"""
@@ -578,13 +596,12 @@ def remove_safe():
 
 
    
-    notsafe_snacks = request.form.getlist('not-safe-delete')
+    notsafe_snacks = request.form.get('not-safe-delete')
   
-    for snack in notsafe_snacks:
 
-        remove_snack = crud.get_notsafesnack(user.user_id)
-        db.session.delete(remove_snack)
-        db.session.commit()
+    remove_snack = crud.get_notsafesnack(user.user_id)
+    db.session.delete(remove_snack)
+    db.session.commit()
 
 
     return redirect('/savedsnacks')

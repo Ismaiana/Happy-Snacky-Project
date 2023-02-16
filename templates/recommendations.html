@@ -16,11 +16,12 @@
             <img src="{{comment.user.avatars[0].avatar}}" style="width: 60px;"/> <strong>{{comment.user.fname}}</strong><br>
                 
             {{comment.comments}}
-                
+            
+            <button type="submit" class="btn btn-link" id="delete-rec" name="comment-delete">Delete</button>  
             <hr class="forum-devider">
                     
             <br>
-    
+            
    {% endfor %}
     {% endif %}
 
