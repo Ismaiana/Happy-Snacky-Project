@@ -39,6 +39,10 @@ def create_comment_discussions(user, comments):
 
     return discussions
 
+def get_comment_discussion(user, comments):
+
+    return ForumDiscussions.query.filter_by(user_id=user, comments=comments).first()
+
 
 def create_comment_recommendations(user, comments):
 
@@ -51,6 +55,11 @@ def create_comment_recommendations(user, comments):
 def get_comments_recommendations(user):
 
     return ForumRecommendations.query.filter_by(user_id= user).all()
+
+
+def get_comment_recommendation(user, comments):
+
+    return ForumRecommendations.query.filter_by(user_id=user, comments=comments).first()
 
 
 def get_all_recommendations():
@@ -117,7 +126,7 @@ def get_safesnacks(user):
 
     return Savedsafe.query.filter_by(user_id=user).all()
 
-def get_safesnack(user):
+def get_safesnack(user, snack):
 
     return Savedsafe.query.filter_by(user_id=user).first()
 
@@ -134,7 +143,7 @@ def get_notsafesnacks(user):
     return Savednotsafe.query.filter_by(user_id=user).all()
 
 
-def get_notsafesnack(user):
+def get_notsafesnack(user, snack):
 
     return Savednotsafe.query.filter_by(user_id=user).first()
 

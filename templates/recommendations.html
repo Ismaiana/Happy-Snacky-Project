@@ -4,6 +4,7 @@
 
 {% block body %}
 <br>
+<form action="/delete_comments_rec" class="forum-comments">
 
 <div class="container">
     <div class="forum-rules">
@@ -15,19 +16,20 @@
                 
             <img src="{{comment.user.avatars[0].avatar}}" style="width: 60px;"/> <strong>{{comment.user.fname}}</strong><br>
                 
-            {{comment.comments}}
-            
-            <button type="submit" class="btn btn-link" id="delete-rec" name="comment-delete">Delete</button>  
+            <button type="submit" class="btn btn-link" id="delete-rep" value="{{comment.comments}}" name="comment-delete">Delete</button>{{comment.comments}}
+            <br>
+          
             <hr class="forum-devider">
                     
             <br>
-            
+           
    {% endfor %}
     {% endif %}
+        </div>
+        </div>
+    </form>
 
- 
-
-
+    <div class="container">
     <form action="/forum_comments_recommendations" class="forum-comments">
 
 
@@ -37,6 +39,6 @@
     </form>
 
     </div>
-</div>
+
 
 {% endblock %}

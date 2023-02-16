@@ -207,7 +207,6 @@ def user_registration():
 
 
 @app.route('/login', methods=['POST'])
-
 def login_form():
     """Process user login"""
 
@@ -229,7 +228,15 @@ def login_form():
         flash(f'Welcome {user.fname}!')
 
         return redirect('/profile')
+    
 
+@app.route('/reset_password', methods=['POST'])
+def reset_request():
+    """Process reset password request"""
+
+
+
+    return render_template('reset_password.html')
 
 @app.route('/random', methods=['GET', 'POST'])
 def random_snack():
@@ -347,7 +354,6 @@ def forum_rules():
 def discussions_forum():
     """Display discussions forum"""
 
-    
 
     comments = crud.get_all_discussions()
    
@@ -373,17 +379,33 @@ def comment_discussions():
     return redirect('/discussions')
 
 
+@app.route('/delete_comments_dis')
+def delete_comments_dis():
+    """Button to delete comment in forum discussions"""
+
+    email = session['user_email']
+
+    user = crud.get_user_by_email(email)
+
+    delete_button = request.args.get('comment-delete')
+    
+    remove_comment = crud.get_comment_discussion(user.user_id, delete_button)
+
+    db.session.delete(remove_comment)
+    db.session.commit()
+
+    return redirect('/discussions')
+
+
 @app.route('/recommendations')
 def recommendations_forum():
     """Display recommendations forum"""
 
-    
 
     comments = crud.get_all_recommendations()
    
 
     return render_template('recommendations.html',comments=comments)
-
 
 
 @app.route('/forum_comments_recommendations')
@@ -404,6 +426,24 @@ def comment_recommendations():
     return redirect('/recommendations')
 
 
+@app.route('/delete_comments_rec')
+def delete_comments_rec():
+    """Button to delete comment in forum recommendations"""
+
+    email = session['user_email']
+
+    user = crud.get_user_by_email(email)
+
+    delete_button = request.args.get('comment-delete')
+    
+    remove_comment = crud.get_comment_recommendation(user.user_id, delete_button)
+
+    db.session.delete(remove_comment)
+    db.session.commit()
+
+    return redirect('/recommendations')
+
+
 @app.route('/reports')
 def reports_forum():
     """Display reports forum"""
@@ -417,7 +457,7 @@ def reports_forum():
 
 
 @app.route('/forum_comments_reports')
-def comment_reports():
+def comment_reports_rec():
     """Create comments for forum reports"""
 
     email = session['user_email']
@@ -435,8 +475,8 @@ def comment_reports():
 
 
 @app.route('/delete_comments_rep')
-def delete_comments():
-    """Button to delete comment in forums"""
+def delete_comments_rep():
+    """Button to delete comment in forum reports"""
 
     email = session['user_email']
 
@@ -451,6 +491,7 @@ def delete_comments():
     db.session.commit()
 
     return redirect('/reports')
+
 
 @app.route('/avatars')
 def show_avatars():
@@ -574,13 +615,13 @@ def remove_not_safe():
 
 
    
-    safe_snacks = request.form.getlist('safe-delete')
+    safe_snack = request.form.get('safe-delete')
   
-    for snack in  safe_snacks:
+ 
 
-        remove_snack = crud.get_safesnack(user.user_id)
-        db.session.delete(remove_snack)
-        db.session.commit()
+    remove_snack = crud.get_safesnack(user.user_id, safe_snack)
+    db.session.delete(remove_snack)
+    db.session.commit()
 
 
     return redirect('/savedsnacks')
@@ -596,10 +637,10 @@ def remove_safe():
 
 
    
-    notsafe_snacks = request.form.get('not-safe-delete')
+    notsafe_snack = request.form.get('not-safe-delete')
   
 
-    remove_snack = crud.get_notsafesnack(user.user_id)
+    remove_snack = crud.get_notsafesnack(user.user_id, notsafe_snack)
     db.session.delete(remove_snack)
     db.session.commit()
 
