@@ -24,27 +24,4 @@
 </form>
 
 
-<form action="/remove_notsafesnacks" method="POST">
-
-<div class="form-group col-md-5">
-
-      
-<strong> NOT SAFE FOR ME :( </strong>
-
-{% for snack in not_safe %}
-
-  
-        <p>{{snack['title']}}</p>
-        <img src="{{snack['image']}}">
-        <p><h6>{{snack['ingredients']}}</h6></p>
-
-
- 
-        <button type="submit" class="btn btn-link" id="delete-notsafe" name="not-safe-delete">Delete</button>
-{% endfor %}
-</div>
-</form>
-
-<script src="/static/main.js"></script>
-
 {% endblock %}

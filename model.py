@@ -17,8 +17,7 @@ class User(db.Model):
     
     
     restrictions = db.relationship('Badingredient', back_populates='user')
-    savedsafe = db.relationship('Savedsafe', back_populates='user')
-    savednotsafe = db.relationship('Savednotsafe', back_populates='user')
+    saved_snacks = db.relationship('Savedproducts', back_populates='user')
     forumdiscussions = db.relationship('ForumDiscussions', back_populates='user')
     forumrecommendations = db.relationship('ForumRecommendations', back_populates='user')
     forumreports = db.relationship('ForumReports', back_populates='user')
@@ -58,35 +57,20 @@ class Badingredient(db.Model):
         return f'<Badingredient restriction_id={self.restriction_id} dietary_restriction={self.dietary_restriction}>'
 
 
-class Savedsafe(db.Model):
+class Savedproducts(db.Model):
 
-    __tablename__ = 'safe_snacks'
+    __tablename__ = 'saved_snacks'
 
     snack_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     title = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
     
-    user = db.relationship('User', back_populates='savedsafe')
+    user = db.relationship('User', back_populates='saved_snacks')
 
     def __repr__(self): 
-        return f'<Savedsafe snack_id={self.snack_id} title={self.title}>'
+        return f'<Savedproducts snack_id={self.snack_id} title={self.title}>'
 
-
-class Savednotsafe(db.Model):
-    
-    __tablename__ = 'notsafe_snacks'
-
-    snack_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    title = db.Column(db.String, nullable=False)
-    image = db.Column(db.String)
-    ingredients= db.Column(db.String)
-
-    user = db.relationship('User', back_populates='savednotsafe')
-
-    def __repr__(self): 
-        return f'<Savednotsafe nsnack_id={self.snack_id} title={self.title}>'
 
 class ForumDiscussions(db.Model):
     

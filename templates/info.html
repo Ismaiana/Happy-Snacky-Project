@@ -18,22 +18,15 @@
     {% if data%}    
 
        <!-- GREEN SAVE BUTTON/SAFE LIST  -->
-        <form action="/safesnacks" method="POST">
+        <form action="/savesnacks" method="POST">
 
         <input type="hidden" value="{{data['title']}}" name="title" >
         <input type="hidden" value="{{data['image']}}" name="image">
-        <button class="a btn btn-success" type="submit" name="saves"><i class="bi bi-bookmark-heart-fill"></i> | Save For Later</button>
+        <button class="a btn btn-success" type="submit" name="saves"><i class="bi bi-bookmark-heart-fill"></i> | Save </button>
 
         </form>
 
-        <!-- RED SAVE BUTTON/ NOT SAFE LIST  -->         
-        <form action="/notsafesnacks" method="POST">
 
-        <input type="hidden" value="{{data['title']}}" name="title" id="product-title" >
-        <input type="hidden" value="{{data['image']}}" name="image" id="product-image">
-        <input type="hidden" value="{{data['ingredientList']}}" name="ingredients" id="ingredients">
-        <button class="b btn btn-danger" type="submit" name="saven"><i class="bi bi-emoji-frown"></i> | Not Safe List</button>
-        </form><br>
 
         <!-- DATA PRODUCT INFO -->    
         <input type="hidden" value="{{data['id']}}" name="title" id="product-id" >

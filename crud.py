@@ -131,23 +131,6 @@ def get_safesnack(user, snack):
     return Savedsafe.query.filter_by(user_id=user).first()
 
 
-def create_savednotsafe(user, title, image, ingredients):
-
-    notsafe_snacks= Savednotsafe(user_id=user, title=title, image=image, ingredients=ingredients)
-
-    return notsafe_snacks
-
-
-def get_notsafesnacks(user):
-
-    return Savednotsafe.query.filter_by(user_id=user).all()
-
-
-def get_notsafesnack(user, snack):
-
-    return Savednotsafe.query.filter_by(user_id=user).first()
-
-
 def get_users():
     
 
@@ -164,6 +147,18 @@ def get_user_by_email(email):
    
 
     return User.query.filter(User.email == email).first()
+
+def reset_password(user, new_password):
+
+    user_password = User.query.filter_by(user_id=user).first()
+
+    user_password.password = new_password
+
+    return user_password
+
+
+
+
     
 
 

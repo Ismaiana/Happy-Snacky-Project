@@ -1,9 +1,12 @@
 """Server for happy snacky app"""
 
 
-from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from flask import Flask, render_template, request, flash, session, redirect, jsonify, url_for
 from passlib.hash import argon2
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 from model import connect_to_db, db
+import secrets
 import os
 import crud
 import requests
@@ -16,9 +19,11 @@ app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined
 app.secret_key = os.environ["secret_key"]
 app.Spoonacular_KEY = os.environ["Spoonacular_KEY"]
+app.SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 app.Host_KEY = os.environ["Host_KEY"]
 connect_to_db(app)
 
+reset_tokens = {}
 
 @app.route('/')
 def homepage():
@@ -135,7 +140,7 @@ def snack_info(id):
     
     for ingredient_index in range(len(product_info_data['ingredients'])):
         if product_info_data['ingredients'][ingredient_index]['name'] in exceptions:
-            # print(product_info_data['ingredients'][ingredient_index]['name'])
+           
             pass
         else:
             cleaner_product_info_data.append(product_info_data['ingredients'][ingredient_index])
@@ -230,13 +235,85 @@ def login_form():
         return redirect('/profile')
     
 
-@app.route('/reset_password', methods=['POST'])
-def reset_request():
-    """Process reset password request"""
+@app.route('/reset_password')
+def reset_form():
+    """Form reset password request"""
 
 
 
     return render_template('reset_password.html')
+
+
+@app.route('/reset_password', methods=['POST'])
+def reset_request():
+    """Send email with password request"""
+
+    email = request.form.get('email_db')
+    print(email)
+    user = crud.get_user_by_email(email)
+
+    if not user:
+        flash('Email did not match our records, try again')
+        return redirect('/reset_password')
+
+    else:
+        
+        token = secrets.token_urlsafe(32)
+        
+        reset_tokens[email] = token
+        flash('Link to reset password sent to your email')
+        message = Mail(
+        from_email='no-reply_happysnacky@hotmail.com',
+        to_emails= email,
+        subject='Reset your Password',
+        html_content=f'<strong>Hello,<br> We just received a request for a new password from your account. To reset your password, just click the link below.</strong> \
+        <a href="{url_for("password_request_form", email=email, token=token, _external=True)}"><br>Reset Password</a>')
+        try:
+            sg = SendGridAPIClient(os.environ.get(app.SENDGRID_API_KEY))
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print(e.message)
+
+        return redirect('/')
+
+
+@app.route('/process_request_password')
+def password_request_form():
+    """Display form for password change"""
+
+    email = request.args.get('email')
+    token = request.args.get('token')
+  
+    if email in reset_tokens and reset_tokens[email] == token:
+        session['user_email'] = email
+        return render_template('new_password.html')
+    else:
+        flash('Invalid or expired password reset link')
+        return redirect('/')
+
+
+@app.route('/process_request_password', methods=['POST'])
+def new_password():
+    email = session['user_email']
+    new_password = request.form.get('new-password')
+    confirm_password = request.form.get('confirm-password')
+    user = crud.get_user_by_email(email)
+
+    hashed = argon2.hash(confirm_password)
+
+    if new_password == confirm_password:
+        new_password_db = crud.reset_password(user.user_id, hashed)
+        db.session.add(new_password_db)
+        db.session.commit()
+
+       
+        del reset_tokens[email]
+
+    return redirect('/')
+
 
 @app.route('/random', methods=['GET', 'POST'])
 def random_snack():
@@ -561,13 +638,13 @@ def show_snacks():
     email= session['user_email']
     user = crud.get_user_by_email(email)
     saved_snacks = crud.get_safesnacks(user.user_id)
-    not_safe = crud.get_notsafesnacks(user.user_id)
+   
     
 
-    return render_template('savedsnacks.html', saved_snacks=saved_snacks, not_safe=not_safe)
+    return render_template('savedsnacks.html', saved_snacks=saved_snacks)
 
 
-@app.route('/safesnacks', methods=['GET','POST'])
+@app.route('/savesnacks', methods=['GET','POST'])
 def saved_snacks():
     """Save snacks process for save for later snacks button"""
 
@@ -585,24 +662,6 @@ def saved_snacks():
 
     return redirect('/savedsnacks')
     
-
-@app.route('/notsafesnacks', methods=['GET', 'POST'])
-def not_safe():
-    """Save snacks process for not safe snacks button"""
-
-    email= session['user_email']
-    user = crud.get_user_by_email(email)
-
-
-   
-    title = request.form.get('title')
-    image = request.form.get('image')
-    ingredients = request.form.get('ingredients')
-    save_notsafe = crud.create_savednotsafe(user.user_id, title, image, ingredients)
-    db.session.add(save_notsafe)
-    db.session.commit()
-
-    return redirect('/savedsnacks')
     
 
 @app.route('/remove_safesnacks', methods=['POST'])
@@ -627,25 +686,6 @@ def remove_not_safe():
     return redirect('/savedsnacks')
 
 
-@app.route('/remove_notsafesnacks', methods=['POST'])
-def remove_safe():
-    """Delete saved snack from not safe list and db"""
-
-    email = session['user_email']
- 
-    user = crud.get_user_by_email(email)
-
-
-   
-    notsafe_snack = request.form.get('not-safe-delete')
-  
-
-    remove_snack = crud.get_notsafesnack(user.user_id, notsafe_snack)
-    db.session.delete(remove_snack)
-    db.session.commit()
-
-
-    return redirect('/savedsnacks')
 
 
 @app.route('/logout')
