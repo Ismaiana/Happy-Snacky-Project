@@ -637,7 +637,7 @@ def show_snacks():
 
     email= session['user_email']
     user = crud.get_user_by_email(email)
-    saved_snacks = crud.get_safesnacks(user.user_id)
+    saved_snacks = crud.get_savedsnacks(user.user_id)
    
     
 
@@ -646,7 +646,7 @@ def show_snacks():
 
 @app.route('/savesnacks', methods=['GET','POST'])
 def saved_snacks():
-    """Save snacks process for save for later snacks button"""
+    """Save snacks process for save product"""
 
     email = session['user_email']
     user = crud.get_user_by_email(email)
@@ -655,7 +655,7 @@ def saved_snacks():
    
     title = request.form.get('title')
     image = request.form.get('image')
-    save = crud.create_savedsafe(user.user_id, title, image)
+    save = crud.create_saved(user.user_id, title, image)
     db.session.add(save)
     db.session.commit()
 
@@ -664,9 +664,9 @@ def saved_snacks():
     
     
 
-@app.route('/remove_safesnacks', methods=['POST'])
-def remove_not_safe():
-    """Delete saved snack from safe list and db"""
+@app.route('/remove_savedsnacks', methods=['POST'])
+def remove_snack():
+    """Delete saved snack from list and db"""
 
     email = session['user_email']
  
@@ -674,13 +674,14 @@ def remove_not_safe():
 
 
    
-    safe_snack = request.form.get('safe-delete')
+    snack = request.form.get('delete-safe')
   
- 
+    saved_snack = crud.get_savednack(user.user_id, snack)
 
-    remove_snack = crud.get_safesnack(user.user_id, safe_snack)
-    db.session.delete(remove_snack)
-    db.session.commit()
+    if saved_snack:
+    
+        db.session.delete(saved_snack)
+        db.session.commit()
 
 
     return redirect('/savedsnacks')

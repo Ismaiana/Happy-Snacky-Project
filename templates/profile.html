@@ -1,5 +1,5 @@
 <div id="navbar">
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(132, 182, 132); padding: 1rem;">
+  <nav class="navbar navbar-expand-lg navbar-light" style="padding: 0.1rem;">
     <a class="navbar-brand" href="#">
       <h1><i class="bi bi-egg"></i></h1>
     </a>
@@ -34,21 +34,56 @@
     </div>
   </nav>
 </div>
-
 <style>
-.nav-item {
+.navbar {
+  background: linear-gradient(to right, #7db66f, #a4df9c, #cce2cb, #e4f5e4, #fffffe);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  opacity: 0.9;
+}
 
-font-family: Courier New black;
-font-weight: bold;
-font-size: 25px;
+.navbar a {
+  color: #fcf6f6;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 20px;
+  transition: color 0.2s ease-in-out;
+}
 
+.navbar a:hover {
+  color: #0f0e0e;
+}
 
+.navbar .dropdown-menu {
+  background-color: #050505;
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  display: none;
+}
 
-  }
+.navbar .dropdown-menu a {
+  color: #faf5f5;
+  display: block;
+  padding: 5px 0;
+  margin: 5px 0;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.navbar .dropdown-menu a:hover {
+  background-color: #8bb880;
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 </style>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -60,7 +95,7 @@ font-size: 25px;
   
 
 
-  </div>
+ 
 
 
 
@@ -75,133 +110,107 @@ font-size: 25px;
 
  <style>
 
-  .restrictions input[type="checkbox"] {
-    display: none;
-  }
+body {
+  background-image: url('static/img/top-view-delicious-nuts-concept.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(10, 12, 11, 0.15);
+  border: none;
+  margin: -20rem auto 0;
+  border-radius: .9rem;
+  width: 145%;
  
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f0f0f3;
-  }
+}
 
-  .profile-title {
-    margin: 50px 0;
-    text-align: center;
-  }
+.gradient-custom {
+  background-color: #0f1011;
+  background-image: linear-gradient(to bottom right, #090a09, #7b8078);
+  padding: 1.5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
 
-  .card {
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
-  }
+.gradient-custom h6 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
 
-  .gradient-custom {
-    
-    height: 100%;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    text-align: center;
-  }
+.gradient-custom img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
 
-  .gradient-custom h6 {
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
+.card-body {
+  padding: 2rem;
+}
 
-  .gradient-custom img {
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
+.card-body h6 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
 
-  .gradient-custom a {
-    color: #fff;
-    text-decoration: none;
-  }
+.card-body p {
+  font-size: 1rem;
+  color: #333;
+}
 
-  .gradient-custom i {
-    font-size: 16px;
-    color: #fff;
-  }
+.card-body label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
 
-  .card-body {
-    padding: 40px;
-  }
+#add-restrictions {
+  background-color: #111111;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-  .card-body h6 {
-    color: #333;
-    font-size: 18px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
+#add-restrictions:hover {
+  background-color: #8fcc9e;
+}
 
-  .card-body p {
-    color: #777;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
+.card-body button {
+  background-color: #111111;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-  .restrictions {
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
-
-  .restrictions label {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  #remove-restriction-btn {
-    background-color: #21e06b;
-    border: none;
-    color: #37ad00;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  #remove-restriction-btn:hover {
-    background-color:  #21e06b;
-  }
-
-  #remove-restriction-submit {
-    background-color:  #21e06b;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  #remove-restriction-submit:hover {
-    background-color:  #21e06b;
-  }
-
-  input[type="submit"] {
-    background-color: #21e06b;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  input[type="submit"]:hover {
-    background-color:  #21e06b;
-  }
+.card-body button:hover {
+  background-color: #8fcc9e;
+}
 
 </style>
 
 
-
-
-
- 
+ <br>
     
    {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -210,27 +219,27 @@ font-size: 25px;
          {% endfor %}
       {% endif %}
    {% endwith %}
-
-   <div class="profile-title"><h2>Profile</h2></div>
-   <section class="vh-100" style="background-color: #f0f0f3;">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-left align-items-left h-100">
-          <div class="col col-lg-6 mb-4 mb-lg-0">
-           <div class="card mb-3" style="border-radius: .9rem;">
-              <div class="row g-0">
-                <div class="col-md-4 gradient-custom text-center text-white"
-                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+  <br>
+ <div class="profile-title" style="font-family: Courier New; text-align: center;"><h1>Profile</h1></div>
+<section class="vh-100">
+  <div class="container">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3">
+          <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .1rem">
                  
                
                   {% if avatar %}
                   <img src="{{avatar['avatar']}}"
                   
-                    alt="profile-pic" class="img-fluid my-5" style="width: 110px;" />
+                    alt="profile-pic" class="img-fluid my-5" style="width: 125px;" />
                     {% endif %}
                   
                   
 
-                    <button class="btn btn-link" id="change-avatar" name="avatar"><a href="/avatars">Change Avatar</a></button>
+                    <button class="btn btn-link" id="change-avatar" name="avatar"><a href="/avatars" style="color:#ffffff">Change Avatar</a></button>
                   
                   <i class="far fa-edit mb-5"></i>
                 </div>
@@ -254,7 +263,7 @@ font-size: 25px;
                    
                         <div id="restrictions-user">
                           <form action="/addrestrictions">
-                        <h6>Dietary Restrictions  <input type="submit" value="New Restriction"> </h6>
+                        <h6>Dietary Restrictions  <input type="submit" value="New Restriction" id="add-restrictions"> </h6>
     
                         </form>
                         </div>

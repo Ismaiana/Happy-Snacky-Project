@@ -1,52 +1,88 @@
-
-
 <div id="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(132, 182, 132); padding: 1rem;">
-      <a class="navbar-brand" href="#">
-        <h1><i class="bi bi-egg"></i></h1>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav" style="font-size: 1.2rem;">
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/search">Search</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/forum">Forums</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Options
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/savedsnacks">Saved</a>
-              <a class="dropdown-item" href="/about">About</a>
-              <a class="dropdown-item" href="#"></a>
-              <a class="dropdown-item" name="logout" href="/logout"><strong>Log Out</strong></a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
+  <nav class="navbar navbar-expand-lg navbar-light" style="padding: 0.1rem;">
+    <a class="navbar-brand" href="#">
+      <h1><i class="bi bi-egg"></i></h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" style="font-size: 1.2rem;">
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/search">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/forum">Forums</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Options
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/savedsnacks">Saved</a>
+            <a class="dropdown-item" href="/about">About</a>
+            <a class="dropdown-item" href="#"></a>
+            <a class="dropdown-item" name="logout" href="/logout"><strong>Log Out</strong></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
 <style>
-.nav-item {
+.navbar {
+  background: linear-gradient(to right, #7db66f, #a4df9c, #cce2cb, #e4f5e4, #fffffe);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  opacity: 0.9;
+}
 
- font-family: Courier New black;
- font-weight: bold;
- font-size: 25px;
- 
+.navbar a {
+  color: #fcf6f6;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 20px;
+  transition: color 0.2s ease-in-out;
+}
 
+.navbar a:hover {
+  color: #0f0e0e;
+}
 
-    }
+.navbar .dropdown-menu {
+  background-color: #050505;
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  display: none;
+}
+
+.navbar .dropdown-menu a {
+  color: #faf5f5;
+  display: block;
+  padding: 5px 0;
+  margin: 5px 0;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.navbar .dropdown-menu a:hover {
+  background-color: #8bb880;
+  color: #ffffff;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 </style>
   
   <link rel="stylesheet" href="static/css/style.css">
@@ -74,81 +110,74 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+
+
+
+
 {% endblock %}
+
 
 {% block body %}
 
-<!-- FORM FOR FORUM PAGE  -->
-<br>
-<form action="/forum" class="login-form">
 
 
-    <div class="container">
-        <div class="forum-rules">
-            <div class="forum-title">
-                <h1><i class="bi bi-lightbulb"> </i>WELCOME TO FORUM</h1><br>
-            </div>
-            <div class="forum-row">
-                <div class="forum-column center">
-    
-                </div>
-                <div class="forum-description forum-column">
-                    <h4><a href="/forum_rules"><p>FORUM RULES</p></a></h4>
-        </div>
-
-        <!-- THREADS  -->
-        <div class="forum">
-            <div class="forum-title">
-            </div>
-            <hr class="forum-devider">
-            <h1>THREADS</h1><br>
-            <div class="forum-row">
-                <div class="forum-column center">
-                </div>
-                <div class="forum-description subforum-column">
-                    <h4> <i class="bi bi-lightbulb"></i> <a href="/discussions">General Discussion </a></h4>
-                    <p>A forum where we talk about what we can't eat, and cry about how we miss cheese.</p>
-                </div>
-                <div class="forum-column center">
-                    <span>0 Posts</span>
-                </div><br>
-                <div class="forum-column">
-                </div>
-            </div>
-            </div>
-            <div class="forum">
-                <div class="forum-row">
-                    <div class="forum-column center">
-                    </div>
-                    <div class="forum-column">
-                        <h4><i class="bi bi-lightbulb"></i> <a href="/recommendations">Products Recommendations</a></h4>
-                        <p>Got a favorite food brand that's allergy-friendly? Or a tasty snack you can't stop recommending? Share your finds with the community and spread the love (and the allergy relief)!</p>
-                    </div>
-                    <div class="forum-column center">
-                        <span>0 Posts </span>
-                    </div><br>
-                    <div class="forum-column">
-                    </div>
-                </div>
-                </div>
-
-            <div class="forum-column center">
-    
-            </div>
-            <div class="forum-column">
-                <h4><i class="bi bi-lightbulb"></i> <a href="/reports">Products/Bugs report</a></h4>
-                <p>Did you find a bug in our app/data? Don't squish it! Report it to us instead.</p>
-            </div>
-            <div class="forum-column center">
-                <span>0 Posts </span>
-            </div><br>
-            <div class="forum-column">
-            </div>
-        </div>
+<div class="container">
+  <!-- FORUM RULES  -->
+  <div class="forum-rules">
+    <div class="forum-title">
+      <h1><i class="bi bi-lightbulb"></i> WELCOME TO FORUM</h1>
     </div>
-</div>    
-<!-- END FORM  -->
-    </form>
+    <div class="forum-row">
+      <div class="forum-column center"></div>
+      <div class="forum-description forum-column">
+        <h4><a href="/forum_rules">FORUM RULES</a></h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- THREADS -->
+  <div class="forum">
+    <div class="forum-title">
+      <hr class="forum-devider">
+      <h1>THREADS</h1>
+    </div>
+    <div class="forum-row">
+      <div class="forum-column center"></div>
+      <div class="forum-description subforum-column">
+        <h4><i class="bi bi-lightbulb"></i> <a href="/discussions">General Discussion</a></h4>
+        <p>A forum where we talk about what we can't eat, and cry about how we miss cheese.</p>
+      </div>
+      <div class="forum-column center">
+        <span>0 Posts</span>
+      </div>
+      <div class="forum-column"></div>
+    </div>
+
+    <div class="forum-row">
+      <div class="forum-column center"></div>
+      <div class="forum-column">
+        <h4><i class="bi bi-lightbulb"></i> <a href="/recommendations">Products Recommendations</a></h4>
+        <p>Got a favorite food brand that's allergy-friendly? Or a tasty snack you can't stop recommending? Share your finds with the community and spread the love (and the allergy relief)!</p>
+      </div>
+      <div class="forum-column center">
+        <span>0 Posts</span>
+      </div>
+      <div class="forum-column"></div>
+    </div>
+
+    <div class="forum-row">
+      <div class="forum-column center"></div>
+      <div class="forum-column">
+        <h4><i class="bi bi-lightbulb"></i> <a href="/reports">Products/Bugs report</a></h4>
+        <p>Did you find a bug in our app/data? Don't squish it! Report it to us instead.</p>
+      </div>
+      <div class="forum-column center">
+        <span>0 Posts</span>
+      </div>
+      <div class="forum-column"></div>
+    </div>
+  </div>
+</div>
 
 
     <script src="main.js"></script>
