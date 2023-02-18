@@ -2,29 +2,98 @@
 {% block title %}Happy Snacky{% endblock %}
 
 {% block body %}
-<div class="background-css">
+<style>
+body {
+  background-image: url('static/img/fast-food-black-slate-with-copy-space.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, p {
+  color: white;
+}
+
+.login-page {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20vh;
+  width: 80%;
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+  width: 100%;
+  max-width: 275px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.flash-message {
+  color: aliceblue;
+  margin: 10px 0;
+}
+
+footer {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 768px) {
+  .login-page {
+    bottom: 10vh;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login-page {
+    bottom: 5vh;
+  }
+}
+</style>
+
 <br>
     <div class="login-form">
         <div class="container">
             <div class="login-page">
-        <h1>Welcome to Happy Snacky!</h1><br>
+     
         </div>
         </div>
 
         <div class="container">
             <div class="login-page">
+
+                <h1>Welcome to Happy Snacky!</h1><br>
+
+           
+          
         <h2>Login</h2>
     
         <form action="/login" method="POST" class="form-login">
 
             <p> 
-             Email <input type="text" name="email" style="width: 230px;">
+             Email<br> <input type="text" name="email" style="width: 340px;">
             </p>
 
             <p> 
              Password <input type="password" name="password">
             </p>    
 
+
+            <div class="flash-message">
             {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
@@ -32,7 +101,7 @@
                      {% endfor %}
                   {% endif %}
               {% endwith %}
-
+            </div>
             <p>
              <input type="submit" value="Login" style="width: 275px;">
             </p>
@@ -47,7 +116,19 @@
            </div>
     </div>
 
-</div>
-</div>
+
+
+
+
+<footer>
+<div class="row justify-content-center align-items-center">
+    <a href="/about" class="text-center text-decoration-none" style="color :hsla(0, 0%, 0%, 0.992);"><h3>© About </h3></a>
+  </div>
+</footer>
+
+
 {% endblock %}
+
+
+
 

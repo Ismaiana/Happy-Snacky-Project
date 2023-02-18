@@ -1,7 +1,76 @@
+
+
+<div id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(132, 182, 132); padding: 1rem;">
+      <a class="navbar-brand" href="#">
+        <h1><i class="bi bi-egg"></i></h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav" style="font-size: 1.2rem;">
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/forum">Forums</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Options
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/savedsnacks">Saved</a>
+              <a class="dropdown-item" href="/about">About</a>
+              <a class="dropdown-item" href="#"></a>
+              <a class="dropdown-item" name="logout" href="/logout"><strong>Log Out</strong></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+<style>
+.nav-item {
+
+ font-family: Courier New black;
+ font-weight: bold;
+ font-size: 25px;
+ 
+
+
+    }
+</style>
+  
+  <link rel="stylesheet" href="static/css/style.css">
+  
+  
+  
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+     
+      
+  
+    
+  
+  
+
+
+
+
 {% extends 'base.html' %}
 {% block title %}Discussions{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="style.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
@@ -10,7 +79,7 @@
 {% block body %}
 
 <!-- FORM FOR FORUM PAGE  -->
-
+<br>
 <form action="/forum" class="login-form">
 
 
@@ -38,7 +107,7 @@
                 </div>
                 <div class="forum-description subforum-column">
                     <h4> <i class="bi bi-lightbulb"></i> <a href="/discussions">General Discussion </a></h4>
-                    <p>General discussion, questions and experiences.</p>
+                    <p>A forum where we talk about what we can't eat, and cry about how we miss cheese.</p>
                 </div>
                 <div class="forum-column center">
                     <span>0 Posts</span>
@@ -53,7 +122,7 @@
                     </div>
                     <div class="forum-column">
                         <h4><i class="bi bi-lightbulb"></i> <a href="/recommendations">Products Recommendations</a></h4>
-                        <p>Products and foods recommendations.</p>
+                        <p>Got a favorite food brand that's allergy-friendly? Or a tasty snack you can't stop recommending? Share your finds with the community and spread the love (and the allergy relief)!</p>
                     </div>
                     <div class="forum-column center">
                         <span>0 Posts </span>
@@ -68,7 +137,7 @@
             </div>
             <div class="forum-column">
                 <h4><i class="bi bi-lightbulb"></i> <a href="/reports">Products/Bugs report</a></h4>
-                <p>Report bugs in our website data.</p>
+                <p>Did you find a bug in our app/data? Don't squish it! Report it to us instead.</p>
             </div>
             <div class="forum-column center">
                 <span>0 Posts </span>

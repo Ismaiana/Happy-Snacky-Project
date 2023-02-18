@@ -1,6 +1,6 @@
 """Crud functions"""
 
-from model import db, User, Badingredient, Savedsafe, Savednotsafe, ForumDiscussions, ForumRecommendations, ForumReports, Avatar, connect_to_db
+from model import db, User, Badingredient, Savedproducts, ForumDiscussions, ForumRecommendations, ForumReports, Avatar, connect_to_db
 
 
 def create_user(email, password, fname, lname):
@@ -124,11 +124,11 @@ def create_savedsafe(user, title, image):
 
 def get_safesnacks(user):
 
-    return Savedsafe.query.filter_by(user_id=user).all()
+    return Savedproducts.query.filter_by(user_id=user).all()
 
 def get_safesnack(user, snack):
 
-    return Savedsafe.query.filter_by(user_id=user).first()
+    return Savedproducts.query.filter_by(user_id=user).first()
 
 
 def get_users():

@@ -1,29 +1,131 @@
+
+<div id="navbar">
+    <div class="--bs-body-color">
+   
+       <h3> <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <i class="bi bi-egg"></i>
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/search">Search</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/forum">Forums</a>
+                </li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Options
+                </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/savedsnacks">Saved</a>
+                    <a class="dropdown-item" href="/about">About</a>
+                    <a class="dropdown-item" href="#">   </a>
+                    <a class="dropdown-item" name="logout" href="/logout"><strong>Log Out</strong></a>
+                </div>
+               </li>
+             </ul>
+          </div>
+        </div>
+      </nav>
+    </h3>
+  </div>        
+  
+      
+  
+  
+  
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+     
+      
+  
+    
+  
+  
+    </div>
+
+
+
+
 {% extends 'base.html' %}
 {% block title %}avatars{% endblock %}
 
 {% block body %}
 
-<form action="/avatars_db" class="select-avatars" method="POST" >
 
-<input type="radio" class="btn-check" name="avatars" value="/static/img/beige-egg.png" id="beige-egg" autocomplete="off">
-<label class="btn btn-outline-primary" for="beige-egg"> <img src="/static/img/beige-egg.png" style="width: 80px;"> </label>
+        <h1>SELECT AVATAR</h1>
 
-<input type="radio" class="btn-check" name="avatars" value="/static/img/blue-egg.png" id="blue-egg" autocomplete="off">
-<label class="btn btn-outline-primary" for="blue-egg"> <img src="/static/img/blue-egg.png" style="width: 80px;"> </label>
-
-<input type="radio" class="btn-check" name="avatars" value="/static/img/orange-egg.png" id="orange-egg" autocomplete="off">
-<label class="btn btn-outline-primary" for="orange-egg"> <img src="/static/img/orange-egg.png" style="width: 80px;"> </label>
-
-<input type="radio" class="btn-check" name="avatars" value="/static/img/pink-egg.png" id="pink-egg" autocomplete="off">
-<label class="btn btn-outline-primary" for="pink-egg"> <img src="/static/img/pink-egg.png" style="width: 80px;"> </label>
-
-<input type="radio" class="btn-check" name="avatars" value="/static/img/purple-egg.png" id="purple-egg" autocomplete="off">
-<label class="btn btn-outline-primary" for="purple-egg"> <img src="/static/img/purple-egg.png" style="width: 80px;"> </label>
-
-<br>
-<input type="submit" value="Save">
+<form action="/avatars_db" class="select-avatars" method="POST">
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/beige-egg.png" id="beige-egg" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="beige-egg">
+      <img src="/static/img/beige-egg.png" class="avatar-img">
+    </label>
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/blue-egg.png" id="blue-egg" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="blue-egg">
+      <img src="/static/img/blue-egg.png" class="avatar-img">
+    </label>
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/orange-egg.png" id="orange-egg" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="orange-egg">
+      <img src="/static/img/orange-egg.png" class="avatar-img">
+    </label>
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/pink-egg.png" id="pink-egg" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="pink-egg">
+      <img src="/static/img/pink-egg.png" class="avatar-img">
+    </label>
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/purple-egg.png" id="purple-egg" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="purple-egg">
+      <img src="/static/img/purple-egg.png" class="avatar-img">
+    </label>
+  
+    <br>
+    <input type="submit" value="Save">
 </form>
 
+<style>
+.select-avatars {
+  margin-top: 20px;
+}
 
+.avatar-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.btn-check:checked + .btn-outline-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+</style>
+
+<script>
+   
+    document.querySelectorAll('.avatar-img').forEach((img) => {
+      img.addEventListener('click', (event) => {
+        const selectedAvatarImg = document.querySelector('.btn-primary.active .avatar-img');
+        if (selectedAvatarImg) {
+       
+          selectedAvatarImg.classList.remove('active');
+        }
+     
+        event.target.classList.add('active');
+      });
+    });
+    </script>
 
 {% endblock %}
