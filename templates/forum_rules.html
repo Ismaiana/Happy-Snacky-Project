@@ -1,26 +1,84 @@
-
-
-
-
-
 {% extends 'base.html' %}
 {% block title %}Forum Rules{% endblock %}
 {% block head %}
+<style>
 
+.card {
+  width: 70%;
+  height: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-<ol>
-    <li>Be respectful: Treat others with respect and refrain from using offensive language or discriminatory remarks.</li>
-    <li>Stay on topic: Make sure your comments relate to foods, allergies and the app. Off-topic comments may be removed.</li>
-    <li>Keep it clean: Avoid posting any inappropriate content, including spam, scams, or malware.</li>
-    <li>Share accurate information: When making recommendations or providing advice, ensure that the information is accurate and based on reliable sources.</li>
-    <li>Protect privacy: Do not share any personal information, including your own or others'.</li>
-    <li>Use common sense: If you are unsure if your post is appropriate, ask yourself if it would be something you would want to read or respond to.</li>
-    <li>Report violations: If you see any violations of these forum rules or notice any suspicious activity, please report it immediately.</li>
-  </ol>
-  Remember, these rules are meant to create a positive and helpful environment for users of the allergen app forum, and to ensure that everyone can share and receive information and support safely and respectfully.
+.card-header {
+  height: 10%;
+  background-color: rgb(132, 182, 132);
+}
 
+.card-body {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  border-left: 3px solid #7dc091;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
 
+li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 20px;
+}
 
-  <div class="footer" style="position: fixed; text-align: center; bottom: 30px; width: 100%;"> <a href="/forum"> Go back </a> </div>
+li:before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: #070807;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+li strong {
+  font-weight: bold;
+  color: #83c789;
+}
+
+</style>
+<br>
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title" style="text-align: center; font-family: Courier New;">Forum Rules</h1>
+  </div>
+  <div class="card-body">
+    <ol>
+      <li>Be respectful: Treat others with respect and refrain from using offensive language or discriminatory remarks.</li>
+      <li>Stay on topic: Make sure your comments relate to foods, allergies and the app. Off-topic comments may be removed.</li>
+      <li>Keep it clean: Avoid posting any inappropriate content, including spam, scams, or malware.</li>
+      <li>Share accurate information: When making recommendations or providing advice, ensure that the information is accurate and based on reliable sources.</li>
+      <li>Protect privacy: Do not share any personal information, including your own or others'.</li>
+      <li>Use common sense: If you are unsure if your post is appropriate, ask yourself if it would be something you would want to read or respond to.</li>
+      <li>Report violations: If you see any violations of these forum rules or notice any suspicious activity, please report it immediately.</li>
+    </ol>
+    <p>Remember, these rules are meant to create a positive and helpful environment for users, and to ensure that everyone can share and receive information and support safely and respectfully.</p>
+  </div>
+</div>
+
+  <div class="footer" style="position: fixed; text-align: center; bottom: 30px; width: 100%;"> 
+    <a href="/forum" style=" color: rgb(132, 182, 132); margin: 0; font-family: 
+    arial; font-size:  20px; font-weight: bold; border: 2px solid rgb(132, 182, 132);">Go back to forum</a> 
+    </div>
   {% endblock %}

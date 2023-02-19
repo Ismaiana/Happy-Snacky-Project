@@ -311,7 +311,7 @@ def new_password():
 
        
         del reset_tokens[email]
-
+        flash('Password updated, please log in')
     return redirect('/')
 
 
