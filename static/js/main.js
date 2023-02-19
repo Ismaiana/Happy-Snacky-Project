@@ -13,7 +13,7 @@ fetch('/restrictions')
         } 
    }
 
-});
+}); 
 
 
 // JS CHART  
