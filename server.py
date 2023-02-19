@@ -662,7 +662,7 @@ def saved_snacks():
 
     return redirect('/savedsnacks')
     
-    
+
 
 @app.route('/remove_savedsnacks', methods=['POST'])
 def remove_snack():

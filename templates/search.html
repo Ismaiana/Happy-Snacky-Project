@@ -118,7 +118,31 @@
 
 
 
+<style>
 
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+</style>
 
 <div class="product-search" >
   
@@ -189,7 +213,10 @@
            
             
             <h2><i class="bi bi-cup-straw"></i> Results</h2>
+            
             <hr>
+
+          
               
           <!-- SEARCH BAR -->
               <div class="main-search-input fl-wrap">
@@ -198,6 +225,8 @@
                     <button class="main-search-button">Search</button>
                     
                   </div></h2>
+                  <br>
+                 
                   </div>
             
               {% if data%}    
@@ -219,19 +248,28 @@
                        <strong>{{ message }}</strong>
                       {% endfor %}
                     {% endif %}
-                  {% endwith %}
+                  {% endwith %} <br>
+
+                  <div class="pagination" style="text-align: center; bottom: 30px; width: 100%;">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                  </div>
     </div>
+    
             </div>
             </div>
           </div>
          </div>
-    
-     
-    </form>
-
-</div>
+  
       
 
+    </form>
+
+
+  {% endblock %}
+
     
-{% endblock %}
 
