@@ -1,3 +1,5 @@
+// AJAX TO HIGHLIGHT RESTRICTIONS IN DATA INFO PRODUCT
+
 fetch('/restrictions')
 .then(response => response.json())
 .then(data => {
@@ -7,37 +9,14 @@ fetch('/restrictions')
     for (let i = 0; i < listIngred.length; i++){
         if (data.includes(listIngred[i].innerHTML)){
             listIngred[i].style.backgroundColor = 'red'
-            // document.querySelector('data-bs-toggle');
-
-            // listIngred[i].getAttribute('data-bs-toggle'); 
-
-            // listIngred[i].setAttribute('data-bs-toggle', 'tooltip');
             
-        }
-    
-        
-    // let nutrients = document.querySelectorAll('#nutrition')    
-    // console.log(nutrients[0].innerHTML)    
-    }
+        } 
+   }
 
 });
-        
 
 
-
-// if( listIngred[i] === 'red') {
-
-//     document.querySelector('data-bs-toggle');
-
-//     listIngred[i].getAttribute('data-bs-toggle'); 
-
-//     listIngred[i].setAttribute('data-bs-toggle', 'tooltip');
-
-// };
-
-
-
-// function getData(id) {
+// JS CHART  
 
 const id = document.querySelector('#product-id').value
 fetch(`/nutrition-info/${id}`)
@@ -76,8 +55,15 @@ fetch(`/nutrition-info/${id}`)
 
 
 
-const removeRestrictions = document.querySelector('#remove-restriction');
-removeRestrictions.addEventListener('click', (evt) => { evt.preventDefault();
+// BOX ALERT WHEN USER CLICK DELETE BUTTON IN SAVED SEARCH 
+  function confirmDelete() {
+    
+          const confirmed = confirm("Are you sure you want to delete this product?");
+          if (confirmed) {
+              return true;
+          }
+           else {
+              return false;
+          };
+      };
 
-
-  });
