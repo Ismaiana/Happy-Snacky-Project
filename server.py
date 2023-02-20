@@ -675,7 +675,7 @@ def remove_snack():
 
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET','POST'])
 def process_logout():
     """Log out user in session"""
 

@@ -92,6 +92,19 @@
 
 {% block title %}Reports{% endblock %}
 
+<style>
+
+  .forum-title {
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    margin-bottom: 50px;
+    padding: 20px;
+  }
+  
+  </style>
 
 {% block body %}
 <br>
@@ -99,7 +112,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="forum-rules">
+      <div class="forum-title">
         <h1 class="text-center">Bugs Reports</h1>
         {% if comments is defined %}
           {% for comment in comments %}

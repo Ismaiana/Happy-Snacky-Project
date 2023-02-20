@@ -85,12 +85,27 @@
 
 {% block body %}
 
+<style>
 
+.forum-title {
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
+  padding: 20px;
+}
+
+</style>
+
+<br>
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="forum-rules">
-          <h1 class="text-center">Discussions</h1>
+        <div class="forum-title">
+          <h1 class="text-center">Discussions</h1><br>
+        </div>
           {% if comments is defined %}
             {% for comment in comments %}
               <div class="media">
@@ -116,7 +131,6 @@
         </div>
       </div>
     </div>
-</div>
-    
+
 
     {% endblock %}
