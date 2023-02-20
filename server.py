@@ -6,6 +6,7 @@ from passlib.hash import argon2
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from model import connect_to_db, db
+from math import ceil
 import secrets
 import os
 import crud
@@ -41,75 +42,61 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/search')
-def search_bar():
-    """Display search bar"""
-
-
-    return render_template('search.html', data=None)
-
-
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def find_snack():
-    """Return user search"""
 
-  
+    """Return user search with filter and pagination"""
+
+    if request.method == 'POST':
+       
+        query = request.form.get('product')
+        restrictions = request.form.getlist('restrictions-search')
+      
+       
+        return redirect(url_for('find_snack', query=query, restrictions=restrictions))
+
+    else:
+       
+        query = request.args.get('query')
+        restrictions = request.args.getlist('restrictions')
+        print(restrictions)
+        if not query:
+            return render_template('search.html')
         
-    if 'user_email' in session:
+        per_page = 16
+        page = request.args.get('page', default=1, type=int)
+        offset = (page - 1) * per_page
 
         
-        email = session['user_email']
- 
-        crud.get_user_by_email(email)
-
-        products = request.form.get('product')
-
-        restriction_filters = request.form.getlist('restrictions-search')
-
         url = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/products/search'
-
         parameters = {
-            'query': products,
+            'query': query,
             'addProductInformation': 'true',
-            'number': '25'
-            
-            }
-
+            'number': per_page,
+            'offset': offset
+        }
         headers = {
             'X-RapidAPI-Key': app.Spoonacular_KEY,
             'X-RapidAPI-Host': app.Host_KEY
         }
-
-        response = requests.request('GET', url, headers=headers, params=parameters)
-
-      
+        response = requests.get(url, headers=headers, params=parameters)
         response.raise_for_status()
-
         data = response.json()
 
-
-        product_data = data['products']
         
-        filtered_product_data = []
-     
-        for product_index in range(len(product_data)):
-
-            if(set(restriction_filters).issubset(set(product_data[product_index]['importantBadges']))):
-                filtered_product_data.append(product_data[product_index])
-
-        if filtered_product_data == []:
+        product_data = data['products']
+        filtered_product_data = [p for p in product_data if all(restriction in p['importantBadges'] for restriction in restrictions)]
+        if not filtered_product_data:
             flash('Your search parameters had no match results.')
-
         data['products'] = filtered_product_data
 
-        return render_template('search.html', data=data, id=id)
+     
+        total_products = data['totalProducts']
+        total_pages = ceil(total_products / per_page)
+        paginated_products = data['products']
 
-
-    else:
-
-        flash('Login required to use search feature.')
-
-        return redirect('/')
+        return render_template('search.html', paginated_products=paginated_products, page=page, restrictions=restrictions, total_pages=total_pages, query=query)
+    
 
 
 
@@ -194,8 +181,7 @@ def user_registration():
     user = crud.get_user_by_email(email)
 
     hashed = argon2.hash(password)
-    print(password)
-    print(hashed)
+   
 
     if user:
         flash('This email adress is already being used.')

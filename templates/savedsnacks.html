@@ -150,7 +150,7 @@
 <form action="/remove_savedsnacks" method="POST">
     <div class="container">
   <div class="row justify-content-center products-container">
-    {% for saved_snack in saved_snacks %}
+    {% for saved_snack in saved_snacks[::-1] %}
     <div class="col-md-4 product-card">
       <div class="card mb-4">
         <div class="snack-saved">
@@ -159,6 +159,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ saved_snack['title'] }}</h5>
           <button type="submit" class="btn btn-link delete-btn" name="delete-safe" value="{{saved_snack['title']}}" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+        
         </div>
       </div>
     </div>
@@ -174,6 +175,42 @@
 arial; font-size:  20px; font-weight: bold; border: 2px solid rgb(132, 182, 132);">New Search</a> 
 </div>
 
+
+<script>
+
+const productCards = document.querySelectorAll('.product-card');
+const numToShow = 6;
+const numAdditional = 3;
+
+for (let i = numToShow; i < productCards.length; i++) {
+  productCards[i].style.display = 'none';
+};
+
+const showMoreBtn = document.createElement('button');
+showMoreBtn.textContent = 'Show More';
+showMoreBtn.classList.add('btn', 'btn-primary');
+showMoreBtn.addEventListener('click', function(event) {
+  event.preventDefault(); 
+
+  const visibleCards = document.querySelectorAll('.product-card:not([style*="display: none"])');
+  const numVisible = visibleCards.length;
+
+
+  for (let i = numVisible; i < numVisible + numAdditional && i < productCards.length; i++) {
+    productCards[i].style.display = 'block';
+  }
+
+ 
+  if (numVisible + numAdditional >= productCards.length) {
+    showMoreBtn.style.display = 'none';
+  }
+});
+
+const container = document.querySelector('.container');
+container.appendChild(showMoreBtn);
+
+
+</script>
 
 <script src="/static/js/main.js"></script>
 

@@ -120,26 +120,19 @@
 
 <style>
 
+
 .pagination {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  border: 1px solid #ddd;
+.pagination .page-item {
+  margin: 0;
 }
 
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-}
-
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
+.pagination .page-link {
+  margin: 0 5px;
 }
 
 </style>
@@ -148,127 +141,142 @@
   
   <form action="/search" method="POST">  
   
-  <!-- FORMAT -->
-  <div class="col-md-12">
-    <div class="grid search">
-      <div class="grid-body">
-        
-        <div class="row">
-         
-          <!-- FILTERS TITLE-->
-          <div class="col-md-3">
-            <h2 class="grid-title"><i class="bi bi-funnel"></i> Filters</h2>
-            <hr>
-          
-            <!-- FILTERS -->
-            
-            <h4>By dietary restriction:</h4>
-            <div class="checkbox">
-              <label><input type="checkbox" class="check" value="sugar_free" name="restrictions-search"> Sugar Free</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="check" value="nut_free" name="restrictions-search"> Nut Free</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="check" value="peanut_free" name="restrictions-search"> Peanut Free</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="check" value="soy_free" name="restrictions-search"> Soy Free</label>
-            </div>
-            <div class="checkbox">
-            <label><input type="checkbox" class="check" value="dairy_free" name="restrictions-search"> Lactose Free</label>
-            </div>
-            <div class="checkbox">
-            <label><input type="checkbox" class="check" value="egg_free" name="restrictions-search"> Egg Free</label>
-            </div>
-            <div class="checkbox">
-            <label><input type="checkbox" class="check" value="corn_free" name="restrictions-search"> Corn Free</label>
-            </div>
-          
+    <!-- FORMAT -->
 
-            <div class="checkbox">
-
-              <div class="checkbox">
-                <label><input type="checkbox" class="check" value="gluten_free" name="restrictions-search"> Gluten Free</label>
-              </div>
-              <label><input type="checkbox" class="check" value="msg_free" name="restrictions-search"> Msg Free</label>
-            </div>
-            
-        
-            <div class="checkbox"><br>
-
-            <h4>By special diet:</h4>
-              <label><input type="checkbox" class="check" value="vegetarian" name="restrictions-search"> Vegetarian</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="check" value="vegan" name="restrictions-search"> Vegan</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="check" value="kosher" name="restrictions-search"> Kosher</label>
-            </div>
-          </div> 
-
-          <!-- RESULTS -->
-          <div class="col-md-9">
+    <div class="col-md-12">
+      <div class="grid search">
+        <div class="grid-body">
+          <div class="row">
            
-            
-            <h2><i class="bi bi-cup-straw"></i> Results</h2>
-            
-            <hr>
+            <!-- FILTERS TITLE-->
 
-          
+            <div class="col-md-3">
+              <h2 class="grid-title"><i class="bi bi-funnel"></i> Filters</h2>
+              <hr>
+            
+              <!-- FILTERS -->
               
-          <!-- SEARCH BAR -->
+              <h4>By dietary restriction:</h4>
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="sugar_free" name="restrictions-search"> Sugar Free</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="nut_free" name="restrictions-search"> Nut Free</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="peanut_free" name="restrictions-search"> Peanut Free</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="soy_free" name="restrictions-search"> Soy Free</label>
+              </div>
+              <div class="checkbox">
+              <label><input type="checkbox" class="check" value="dairy_free" name="restrictions-search"> Lactose Free</label>
+              </div>
+              <div class="checkbox">
+              <label><input type="checkbox" class="check" value="egg_free" name="restrictions-search"> Egg Free</label>
+              </div>
+              <div class="checkbox">
+              <label><input type="checkbox" class="check" value="corn_free" name="restrictions-search"> Corn Free</label>
+              </div>
+            
+  
+              <div class="checkbox">
+  
+                <div class="checkbox">
+                  <label><input type="checkbox" class="check" value="gluten_free" name="restrictions-search"> Gluten Free</label>
+                </div>
+                <label><input type="checkbox" class="check" value="msg_free" name="restrictions-search"> Msg Free</label>
+              </div>
+              
+          
+              <div class="checkbox"><br>
+  
+              <h4>By special diet:</h4>
+                <label><input type="checkbox" class="check" value="vegetarian" name="restrictions-search"> Vegetarian</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="vegan" name="restrictions-search"> Vegan</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" class="check" value="kosher" name="restrictions-search"> Kosher</label>
+              </div>
+            </div> 
+            
+            <!-- RESULTS -->
+
+            <div class="col-md-9">
+             
+              
+              <h2><i class="bi bi-cup-straw"></i> Results</h2>
+              
+              <hr>
+
+              <!-- SEARCH BAR -->
+
               <div class="main-search-input fl-wrap">
                 <h2><div class="main-search-input-item">
-                  <input type="text" name="product" id="search-bar" value="" placeholder="Search Products...">             
+                  <input type="text" name="product" id="search-bar" value="{{ query if query is defined else '' }}" placeholder="Search Products...">             
                     <button class="main-search-button">Search</button>
                     
                   </div></h2>
                   <br>
-                 
-                  </div>
-            
-              {% if data%}    
-                  {% for product in data['products'] %}
-            
-                    <p> <a href="/info/{{product['id']}}">{{product['title']}}</a></p>
-            
-                    <img src="{{product['image']}}">
-                          
-                  {% endfor %}
-              {% endif %}
+                  {% if paginated_products is defined %}
+                    <div class="results">
+                    
+                        {% for product in paginated_products %}
+                        
+                        <h3 ><a href="/info/{{product['id']}}">{{ product['title'] }}</a></h3><br>
+        
+                              <img src="{{ product['image'] }}" style=" max-height: 300px; object-fit: contain" ><br>
+                       
+                          <hr>
+                        {% endfor %}
 
-                <!-- FLASH MESSAGE FOR NO MATCH RESULTS  -->
-      
+
+                     <!-- FLASH MESSAGE FOR NO MATCH RESULTS  -->
 
                   {% with messages = get_flashed_messages() %}
-                   {% if messages %}
-                      {% for message in messages %}
-                       <strong>{{ message }}</strong>
-                      {% endfor %}
-                    {% endif %}
-                  {% endwith %} <br>
+                  {% if messages %}
+                     {% for message in messages %}
+                      <strong>{{ message }}</strong>
+                     {% endfor %}
+                   {% endif %}
+                 {% endwith %} <br>
+                    </div>
 
-                  <div class="pagination" style="text-align: center; bottom: 30px; width: 100%;">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                  </div>
-    </div>
-    
-            </div>
+                     <!-- PAGINATION  -->
+                     <div class="pagination">
+                      <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                          {% if page != 1 %}
+                          
+                          <li class="page-item">
+                           
+                            <a class="page-link" href="{{ url_for('find_snack', query=query, restrictions=restrictions, page=page-1) }}">Previous</a>
+                          </li>
+                          
+                          {% endif %}
+                          <div class="page-item-disabled">
+                            <li class="page-item">
+                              {% if page < total_pages %}
+                              <a class="page-link" href="{{ url_for('find_snack', query=query, restrictions=restrictions, page=page+1) }}">Next</a>
+                              {% endif %}
+                            </li>
+                          </div>
+                        </ul>
+                      </nav>
+                      {% endif %}
+                    </div>
+                </div>
+              </div>
             </div>
           </div>
-         </div>
-  
-      
+       </div>
+     </div>
+  </form>              
+  </div>     
 
-    </form>
-
-
+    
   {% endblock %}
 
     
