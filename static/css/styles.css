@@ -1,4 +1,4 @@
- .controversial {
+.controversial {
     color:yellow;
 }
 .medium {
@@ -15,14 +15,14 @@
     }
   }
   
-  @media screen and (max-width: 576px) {
+@media screen and (max-width: 576px) {
     .login-page {
       bottom: 5vh;
     }
   }
 
   
-  .navbar {
+.navbar {
     background: linear-gradient(to right, #7db66f, #a4df9c, #cce2cb, #e4f5e4, #fffffe);
     display: flex;
     justify-content: space-between;
@@ -31,7 +31,7 @@
     opacity: 0.9;
   }
   
-  .navbar a {
+.navbar a {
     color: #fcf6f6;
     font-weight: bold;
     text-transform: uppercase;
@@ -39,11 +39,11 @@
     transition: color 0.2s ease-in-out;
   }
   
-  .navbar a:hover {
+.navbar a:hover {
     color: #0f0e0e;
   }
   
-  .navbar .dropdown-menu {
+.navbar .dropdown-menu {
     background-color: #050505;
     padding: 10px;
     position: absolute;
@@ -53,7 +53,7 @@
     display: none;
   }
   
-  .navbar .dropdown-menu a {
+.navbar .dropdown-menu a {
     color: #faf5f5;
     display: block;
     padding: 5px 0;
@@ -61,11 +61,75 @@
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
   
-  .navbar .dropdown-menu a:hover {
+.navbar .dropdown-menu a:hover {
     background-color: #8bb880;
     color: #ffffff;
   }
   
-  .navbar .dropdown:hover .dropdown-menu {
+.navbar .dropdown:hover .dropdown-menu {
     display: block;
   }
+
+
+
+h1, h2, h3 {
+
+    font-family: Courier New;
+
+}
+
+
+.footer { 
+  position: fixed;     
+  text-align: center;    
+  bottom: 30px; 
+  width: 100%;
+      }  
+
+
+.accordion {
+  background-color: rgb(132, 182, 132);
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.4s;
+  border-top: 2em solid rgb(10, 10, 10);
+  border-bottom: 2em solid rgb(7, 7, 7);
+  border-left: 2em solid rgb(10, 10, 10);
+  border-right: 2em solid rgb(5, 5, 5);
+  border-radius: 14px;
+    }
+
+.active,.accordion:hover {
+    background-color: #000000;
+
+    }
+
+.accordion:after {
+    content: '\002B';
+    color: black;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+    }
+
+.active:after {
+    content: "\2212";
+    }
+
+.panel {
+    padding: 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    }
+
