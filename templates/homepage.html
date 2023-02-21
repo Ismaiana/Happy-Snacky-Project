@@ -21,8 +21,7 @@ h1, h2, h3, p {
 
 .login-page {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 40%;
   bottom: 20vh;
   width: 80%;
   max-width: 500px;
@@ -84,11 +83,11 @@ footer {
         <form action="/login" method="POST" class="form-login">
 
             <p> 
-             Email<br> <input type="text" name="email" style="width: 340px;">
+             Email<br> <input type="email" name="email" class="form-control" required >
             </p>
 
             <p> 
-             Password <input type="password" name="password">
+             Password <input type="password" name="password" class="form-control" required>
             </p>    
 
 
@@ -102,7 +101,7 @@ footer {
               {% endwith %}
             </div>
             <p>
-             <input type="submit" value="Login" style="width: 275px;">
+             <input type="submit" value="Login" style="width: 230px;">
             </p>
             <p><a href="/reset_password"> Forgot your password? </a></p>
 

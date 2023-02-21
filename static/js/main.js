@@ -67,3 +67,14 @@ fetch(`/nutrition-info/${id}`)
           };
       };
 
+
+
+
+
+
+
+
+
+
+
+

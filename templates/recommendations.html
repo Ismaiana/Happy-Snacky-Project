@@ -4,11 +4,13 @@
 
 {% block body %}
 
+<br>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="forum-rules">
+      <div class="forum-title">
         <h1 class="text-center">Recommendations</h1>
+        </div>
         {% if comments is defined %}
           {% for comment in comments %}
             <div class="media">
@@ -34,5 +36,5 @@
       </div>
     </div>
   </div>
-</div>
+
 {% endblock %}
