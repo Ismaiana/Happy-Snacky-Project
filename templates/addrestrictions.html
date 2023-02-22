@@ -4,46 +4,105 @@
 
 {% block body %}
 
-<form action="/addrestrictions" method="POST" class="restrictions">
+<style>
+
+body {
+    background-image: url('static/img/potato-chips-with-pastry-products-wooden-platter-top-corner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;  
+    }
 
 
- 
-    <h3>Dietary Restrictions</h3>
- 
-    <input type="checkbox" id="egg-free"  value="eggs" name="restrictions">
-    <label for="egg_free"> Egg Free</label><br>
-    <input type="checkbox" id="peanut-free"  value="peanuts" name="restrictions">
-    <label for="peanut_free"> Peanut free</label><br>
-    <input type="checkbox" id="nut-free" value="nuts" name="restrictions">
-    <label for="nut_free"> Nut free</label><br>
-    <input type="checkbox" id="soy-free" value="soy" name="restrictions">
-    <label for="soy_free"> Soy free</label><br>
-    <input type="checkbox" id="corn-free" value="corn" name="restrictions">
-    <label for="corn_free"> Corn free</label><br>
-    <input type="checkbox" id="sugar-free" value="sugar" name="restrictions">
-    <label for="sugar_free"> Sugar free</label><br>
-    <input type="checkbox" id="dairy-free" value="dairy" name="restrictions">
-    <label for="dairy_free"> Dairy free</label><br>
-    <input type="checkbox" id="gluten-free" value="gluten" name="restrictions">
-    <label for="gluten_free"> Gluten free</label><br>
-    <input type="checkbox" id="msg-free" value="monosodium glutamate" name="restrictions">
-    <label for="msg_free"> Msg free</label><br>
-    <input type="checkbox" id="salt-free" value="salt" name="restrictions">
-    <label for="msg_free"> Salt free</label><br>
-    <input type="checkbox" id="pork-free" value="pork" name="restrictions">
-    <label for="msg_free"> Pork free</label><br>
-    <input type="checkbox" id="vegan" value="Animal free" name="restrictions">
-    <label for="vegan"> Animal free (Vegan Diet)</label><br>
-    <input type="checkbox" id="vegetarian" value="Meat free" name="restrictions">
-    <label for="vegetarian'"> Meat free (Vegetarian Diet)</label><br>
-    <br>Other
-    <input type="text" id="other" name="restrictions"><br>
-    
-      
+#text-restrictions {
 
-    <br>
-    <input type="submit" value="Save">
-</form>
+    color:white;
+
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #aaa8a8;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 600px;
+    margin: 0 auto;
+}
+.card {
+
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  
   
 
+}
+
+.card-body button {
+  background-color:  #8fcc9e;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card-body button:hover {
+  background-color: #294630;
+}
+
+</style>
+
+<div class="card" style="margin-top: 60px;">
+    <div class="card-body">
+
+    <form action="/addrestrictions" method="POST" class="restrictions">
+
+        <div id="text-restrictions">
+          <h1 class="card-title">Dietary Restrictions</h1>
+          <br>
+        <h5>
+        <input type="checkbox" id="egg-free"  value="eggs" name="restrictions">
+        <label for="egg_free"> Egg Free</label><br>
+        <input type="checkbox" id="peanut-free"  value="peanuts" name="restrictions">
+        <label for="peanut_free"> Peanut free</label><br>
+        <input type="checkbox" id="nut-free" value="nuts" name="restrictions">
+        <label for="nut_free"> Nut free</label><br>
+        <input type="checkbox" id="soy-free" value="soy" name="restrictions">
+        <label for="soy_free"> Soy free</label><br>
+        <input type="checkbox" id="corn-free" value="corn" name="restrictions">
+        <label for="corn_free"> Corn free</label><br>
+        <input type="checkbox" id="sugar-free" value="sugar" name="restrictions">
+        <label for="sugar_free"> Sugar free</label><br>
+        <input type="checkbox" id="dairy-free" value="dairy" name="restrictions">
+        <label for="dairy_free"> Dairy free</label><br>
+        <input type="checkbox" id="gluten-free" value="gluten" name="restrictions">
+        <label for="gluten_free"> Gluten free</label><br>
+        <input type="checkbox" id="msg-free" value="monosodium glutamate" name="restrictions">
+        <label for="msg_free"> Msg free</label><br>
+        <input type="checkbox" id="salt-free" value="salt" name="restrictions">
+        <label for="msg_free"> Salt free</label><br>
+        <input type="checkbox" id="pork-free" value="pork" name="restrictions">
+        <label for="msg_free"> Pork free</label><br>
+        <input type="checkbox" id="vegan" value="Animal free" name="restrictions">
+        <label for="vegan"> Animal free (Vegan Diet)</label><br>
+        <input type="checkbox" id="vegetarian" value="Meat free" name="restrictions">
+        <label for="vegetarian'"> Meat free (Vegetarian Diet)</label><br>
+        <br>Other
+        <input type="text" id="other" name="restrictions"><br>
+    </h5>
+    </div>
+
+    <br>
+    <button type="submit" value="Save"> Save </button>
+    </form>
+   </div>
+</div>
     {% endblock %}

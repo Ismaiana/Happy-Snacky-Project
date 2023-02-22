@@ -1,12 +1,80 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
 
-{% block title %}New User Happy Snacky{% endblock %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+<style>
 
-{% block body %}
+body {
+        
+ margin-top: 200px;
+ background-image: url('static/img/background-resetp.jpg');
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-attachment: fixed;
+    }
+        
+        
+p {
+        
+ color:white;
+ }
+        
+h1 {
+        
+ color:white;
+}
+        
 
-<h1>Welcome New User!</h1>
+a {
+  color:rgb(132, 182, 132);
+  margin: 0;
+  font-family: arial;
+  font-size:  20px;
+  font-weight: bold;
+  border: 2px solid rgb(132, 182, 132);
+  background-color: black;
+   
+    
+}
+  
 
-<form action="/register" method="POST">
+.container {
+  height: 500px;
+  width: auto;
+  display: flex;
+  align-items: center;
+ 
+}
+
+
+    
+    </style>
+
+
+<title>New User</title>
+
+</head>
+
+<body>
+
+<div class="newuser-form">
+    
+    <div class="container">
+        <div class="row justify-content-center">
+          <br>
+            <h1>Welcome New User!</h1>
+            <br>
+          <div class="col-md-6">  
+
+<br>
+
+<form action="/register" method="POST" >
 
     <p>
         First Name <input type="text" name="fname" class="form-control" required>
@@ -25,13 +93,13 @@
 
     </p>
 
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-       {% for message in messages %}
-         <strong>{{ message }}</strong>
-       {% endfor %}
-    {% endif %}
- {% endwith %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+                <strong>{{ message }}</strong>
+            {% endfor %}
+            {% endif %}
+        {% endwith %}
 
     <p>
         <input type="submit" value="Sign Up">
@@ -40,8 +108,14 @@
       
     </form> 
 
+       </div>
+    </div>
+   </div>
+</div>
+
+<div class="footer"> <a href="/"> Go back </a> </div>
+
+
+</body>  
  
-   
-      
- 
-{% endblock %}
+</html>

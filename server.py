@@ -404,11 +404,18 @@ def remove_restriction():
 def forum():
     """Display forum page"""
 
-    return render_template('forum.html')
+    num_posts_dis = len(crud.get_all_discussions())
+    num_posts_rec = len(crud.get_all_recommendations())
+    num_posts_rep = len(crud.get_all_reports())
+
+
+    return render_template('forum.html',  num_posts_dis= num_posts_dis, num_posts_rec= num_posts_rec, num_posts_rep= num_posts_rep)
 
 @app.route('/forum_rules')
 def forum_rules():
     """Display forum rules"""
+
+
 
     return render_template('forum_rules.html')
 
@@ -416,7 +423,8 @@ def forum_rules():
 @app.route('/discussions')
 def discussions_forum():
     """Display discussions forum"""
-
+    
+   
 
     comments = crud.get_all_discussions()
    
@@ -514,6 +522,9 @@ def reports_forum():
     
 
     comments = crud.get_all_reports()
+
+
+    
    
 
     return render_template('reports.html', comments=comments)
@@ -528,6 +539,8 @@ def comment_reports_rec():
     user = crud.get_user_by_email(email)
 
     comments = request.args.get('comment_rep')
+
+   
                                 
     comment = crud.create_comment_reports(user.user_id, comments)
     db.session.add(comment)

@@ -37,8 +37,8 @@ body {
 }
 
 .gradient-custom {
-  background-color: #0f1011;
-  background-image: linear-gradient(to bottom right, #090a09, #7b8078);
+  background-color: #e9f0f8;
+  background-image: linear-gradient(to bottom right, #000000, #e2dfdf);
   padding: 1.5rem;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -79,6 +79,15 @@ body {
   margin-bottom: 0.5rem;
 }
 
+#flash-messages {
+
+ 
+  color: rgb(7, 4, 4);
+ 
+
+
+}
+
 #add-restrictions {
   background-color: #111111;
   color: #fff;
@@ -115,7 +124,8 @@ body {
 
 
  <br>
-    
+  <div id="flash-messages" style="width: 810px; text-align: center; margin-left: 1000px;">
+    <h3>
    {% with messages = get_flashed_messages() %}
       {% if messages %}
          {% for message in messages %}
@@ -123,8 +133,10 @@ body {
          {% endfor %}
       {% endif %}
    {% endwith %}
+  </h3>
+  </div>
   <br>
- <div class="profile-title" style="text-align: center;"><h1>Profile</h1></div>
+ <div class="profile-title" style="text-align: center; margin-top: 60px;"><h1>Profile</h1></div>
 <section class="vh-100">
   <div class="container">
     <div class="row justify-content-center align-items-center h-100">

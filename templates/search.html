@@ -7,10 +7,35 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
+<style>
+
+
+button {
+  background-color: #111111;
+  color: #fff;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #8fcc9e;
+}
+
+
+a:hover {
+ 
+color: #8fcc9e;
+}
+
+</style>
 
 <br>
 
-<div class="product-search" >
+<div class="product-search" style="margin-top: 60px;" >
   
   <form action="/search" method="POST">  
   
@@ -24,8 +49,10 @@
             <!-- FILTERS TITLE-->
 
             <div class="col-md-3">
-              <h2 class="grid-title"><i class="bi bi-funnel"></i> Filters</h2>
-              <hr>
+              <div class="card p-3 rounded">
+               <div class="card-body">
+              <h2 class="grid-title"><i class="bi bi-funnel"></i> Filters</h2><br>
+             
             
               <!-- FILTERS -->
               
@@ -74,6 +101,8 @@
                 <label><input type="checkbox" class="check" value="kosher" name="restrictions-search"> Kosher</label>
               </div>
             </div> 
+          </div>
+        </div>
             
             <!-- RESULTS -->
 

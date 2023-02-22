@@ -14,88 +14,120 @@
 
 {% block body %}
 
+<style>
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+#products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#save-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+</style>
+
       <br>
 
     {% if data%}    
+<!-- GREEN SAVE BUTTON/SAFE LIST  -->
+<div id="save-button" style="margin-top: 60px;">
+<form action="/savesnacks" method="POST">
+  <input type="hidden" value="{{data['title']}}" name="title" >
+  <input type="hidden" value="{{data['image']}}" name="image">
+  <button class="a btn btn-success" type="submit" name="saves" style="width: 110px;">
+      <i class="bi bi-bookmark-heart-fill"></i> | Save
+  </button>
+</form>
+</div>
+<br>
+<!-- DATA PRODUCT INFO -->
 
-       <!-- GREEN SAVE BUTTON/SAFE LIST  -->
-        <form action="/savesnacks" method="POST">
-        
-        <input type="hidden" value="{{data['title']}}" name="title" >
-        <input type="hidden" value="{{data['image']}}" name="image">
-        <button class="a btn btn-success" type="submit" name="saves"><i class="bi bi-bookmark-heart-fill"></i> | Save </button>
+<input type="hidden" value="{{data['id']}}" name="title" id="product-id" >
+<div id="products">
+  <div id="title-products">
+      <h3>{{data['title']}}</h3>
+      <br>
+  </div>
+  <div id="image-products">
+      <img src="{{data['image']}}" style="width: 300px;">
+      <br>
+  </div> <br>
+  <div id="info-products" style="margin: 0 520px; border: 0.1px solid black; border-radius: 10px; padding: 10px;">
+    <h4>Ingredients:</h4>
+    <h5>
+      {% for ingredient in data['ingredients']%}
+        <span id="info-product" value="{{ingredient.safety_level}}">{{ingredient.name}}</span>
+        {% if not loop.last %}
+          <span>,</span>
+        {% endif %}
+      {% endfor %} 
+    </h5>
+  </div>
+  <br>
+  <div id="message"></div>
+  <br>
 
-        </form>
-
-
-
-        <!-- DATA PRODUCT INFO -->    
-        <input type="hidden" value="{{data['id']}}" name="title" id="product-id" >
-        <div id="products">
-            <div id="title-products"><h4>{{data['title']}}</h4><br></div>
-                <div id="image-products"><img src="{{data['image']}}"><br></div> 
-                    <div id="info-products" >
-                        <h5>Ingredients:
-                            {% for ingredient in data['ingredients']%}
+  <h5>
+      <div id="badges">
+          <i class="bi bi-info-square-fill" style="color:rgb(61, 216, 61)"></i> This product should be
+          {% for badge in data['importantBadges'] %}
+              {{badge | replace("_", " ") }}
+              {% if not loop.last %}
+                  <span>,</span>
+                {% endif %}
+           {% endfor %} 
+      {% endif %}
+      </div>
+  </h5> 
                             
-                            <span data-bs-placement="top" data-bs-title="Tooltip on top" id="info-product" value="{{ingredient.safety_level}}" 
-                            title="This ingredient is part of your dietary restrictions">{{ingredient.name}}</span>
-                                {% if not loop.last %}
-                                <span>,</span>
-                                {% endif %}
-                                {% endfor %} 
-                                {% endif %}
-                                </h5>
-                                </div>
+     <!-- NUTRITIONAL INFO DATA JS CHART/ TABLE -->
+<br>
+<div style="background-color: #333; padding: 20px; border-radius: 10px; width: 1500px;">
+  <div class="nutrients-container" style="display: flex;">
+    <div class="chart-container" style="width: 900px; padding-right: 20px;">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="table-nutrients" style="width: 400px; padding-left: 205px;">
+      <h4 style="text-align: center; color: white;">Nutrients Table</h4>
+      <table style="color: white;">
+        <tr>
+          <th>Nutrient</th>
+          <th>Amount</th>
+        </tr>
+        {% for nutrient in data['nutrition']['nutrients'] %}
+        <tr>
+          {% if nutrient['name'] == 'Calories' %}
+          <td><strong>Calories</strong></td>
+          <td>{{ nutrient['amount'] }}</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        {% for nutrient in data['nutrition']['nutrients'] %}
+        <tr>
+          {% if nutrient['name'] != 'Calories' %}
+          <td>{{ nutrient['name'] }}</td>
+          <td>{{ nutrient['amount'] }}</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<br>
 
-                                <h5><div id="badges">
-                                    <i class="bi bi-info-square-fill" style="color:rgb(61, 216, 61)"></i> This product should be
-                                    {% for badge in data['importantBadges'] %}
 
-                                        {{badge | replace("_", " ") }}
 
-                                      {% if not loop.last %}
-                                        <span>,</span>
-                                        {% endif %}
-                                    {% endfor %}
-                                 
-                                    </div>
-                                </h5> 
-                                     <!-- NUTRICIONAL INFO DATA JS CHART/ TABLE-->    
-                                    <br><p><h4>Nutricional Information</h4></p>
-
-                              
-
-                                    <div  style="width:30%"> 
-                                    <canvas id="myChart" ></canvas>
-
-                                </div>
-                                <div class="table-nutrients">
-                                  <h4>Nutrients Table</h4>
-                                <table style="border: 1px solid black; border-collapse: collapse;">
-                                  <tr>
-                                    <th style="border: 1px solid black; padding: 5px;">Nutrient</th>
-                                    <th style="border: 1px solid black; padding: 5px;">Amount</th>
-                                  </tr>
-                                  {% for nutrient in data['nutrition']['nutrients'] %}
-                                    <tr>
-                                      {% if nutrient['name'] == 'Calories' %}
-                                        <td><strong>Calories</strong></td>
-                                        <td>{{ nutrient['amount'] }}</td>
-                                      {% endif %}
-                                    </tr>
-                                  {% endfor %}
-                                  {% for nutrient in data['nutrition']['nutrients'] %}
-                                    <tr style="border: 1px solid black; padding: 5px;">
-                                      {% if nutrient['name'] != 'Calories' %}
-                                        <td style="border: 1px solid black; padding: 5px;">{{ nutrient['name'] }}</td>
-                                        <td style="border: 1px solid black; padding: 5px;">{{ nutrient['amount'] }}</td>
-                                      {% endif %}
-                                    </tr>
-                                  {% endfor %}
-                                </table>
-                              </div>
-                            </div>
 
 
 

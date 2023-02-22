@@ -4,39 +4,50 @@
 
 {% block body %}
 
+<style>
+
+
+.media img {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 30%;
+  }
+  
+    
+</style>
 
 <br>
-<div class="container">
-    <div class="row">
+<div class="container" style="margin-top: 60px;">
+  <div class="row">
       <div class="col-md-12">
-        <div class="forum-title">
-          <h1 class="text-center">Discussions</h1><br>
-        </div>
+          <div class="forum-title">
+              <h1 class="text-center">Discussions</h1><br>
+          </div>
           {% if comments is defined %}
-            {% for comment in comments %}
-              <div class="media">
-                <img class="mr-3" src="{{comment.user.avatars[0].avatar}}" alt="{{comment.user.fname}} Avatar" style="width: 60px;">
-                <div class="media-body">
-                  <h5 class="mt-0">{{comment.user.fname}}</h5>
-                  <p>{{comment.comments}}</p>
-                  <form action="/delete_comments_dis" class="forum-comments">
-                  <button type="submit" class="btn btn-link" id="delete-dis" value="{{comment.comments}}" name="comment-delete">Delete</button>
-                </form>
-                </div>
-              </div>
-              <hr>
-            {% endfor %}
+              {% for comment in comments %}
+                  <div class="media">
+                      <img class="mr-3" src="{{comment.user.avatars[0].avatar}}" alt="{{comment.user.fname}} Avatar" style="width: 60px;">
+                      <div class="media-body">
+                          <h5 class="mt-0">{{comment.user.fname}}</h5>
+                          <p>{{comment.comments}}</p>
+                          <form action="/delete_comments_dis" class="forum-comments">
+                              {% if session['user_email'] == comment.user.email %}
+                                  <button type="submit" class="btn btn-link" id="delete-dis" value="{{comment.comments}}" name="comment-delete">Delete</button>
+                              {% endif %}
+                          </form>
+                      </div>
+                  </div>
+                  <hr>
+              {% endfor %}
           {% endif %}
           <form action="/forum_comments_discussions" class="forum-comments">
-            <div class="form-group">
-              <label for="comment">Leave a comment:</label>
-              <textarea class="form-control" id="comment" rows="3" name="comment_dis"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Post</button>
+              <div class="form-group">
+                  <label for="comment">Leave a comment:</label>
+                  <textarea class="form-control" id="comment" rows="3" name="comment_dis"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Post</button>
           </form>
-        </div>
       </div>
-    </div>
-
+  </div>
+</div>
 
     {% endblock %}

@@ -9,40 +9,45 @@
 } 
 
 
-@media screen and (max-width: 768px) {
-    .login-page {
-      bottom: 10vh;
-    }
-  }
-  
-@media screen and (max-width: 576px) {
-    .login-page {
-      bottom: 5vh;
-    }
-  }
 
   
 .navbar {
-    background: linear-gradient(to right, #7db66f, #a4df9c, #cce2cb, #e4f5e4, #fffffe);
+    background: linear-gradient(to right, #000000, #575656, #aaa5a5);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     opacity: 0.9;
+  
   }
   
-.navbar a {
-    color: #fcf6f6;
+#navbar a {
+    color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
     margin-left: 20px;
     transition: color 0.2s ease-in-out;
   }
   
-.navbar a:hover {
-    color: #0f0e0e;
+#navbar a:hover {
+    color: #a5d688;
   }
   
+
+#navbar h3 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 20px;
+  transition: color 0.2s ease-in-out;
+  background: linear-gradient(to right, #f1a5a8, #f3b4a3, #f5d693, #aee298, #a7f1d7, #9edce7, #979ee0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+#navbar a:hover {
+    color: #a5d688;
+  }
+  
+
 .navbar .dropdown-menu {
     background-color: #050505;
     padding: 10px;
@@ -168,5 +173,27 @@ h1, h2, h3, h4 {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   
+    }
+
+.newuser-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      
+    }
+    
+.select-avatars {
+    margin-top: 20px;
+  }
+    
+.avatar-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50% black;
+    
     }
     
