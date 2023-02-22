@@ -3,12 +3,12 @@
 
 {% block body %}
 <style>
-  
-  .select-avatars {
+
+.select-avatars {
     margin-top: 20px;
   }
   
-  .avatar-img {
+.avatar-img {
     width: 70px;
     height: 70px;
     object-fit: cover;
@@ -17,15 +17,28 @@
   }
   
   
-  .btn-check:checked + .btn-outline-primary {
+.btn-check:checked + .btn-outline-primary {
     background-color: #8fcc9e;
     color: #b0d19a;
   }
 
+.container-avatars {
+
+  height: 500px;
+  width: auto;
+  display: flex;
+  align-items: center;
+ 
+}
+
 
   </style>
-<div class="media">
-  <div class="card">
+
+ 
+    <div class="media">
+      <div class="card">
+        <div class="container-avatars">
+          <div class="row justify-content-center">
   <h1 style="margin-top: 60px;">SELECT AVATAR</h1>
 
 <form action="/avatars_db" class="select-avatars" method="POST" >
@@ -60,10 +73,10 @@
     <br>
     <input type="submit" value="Save">
 </form>
-
 </div>
 </div>
-
+</div>
+</div>
 
 <script>
    
