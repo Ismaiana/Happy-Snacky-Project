@@ -75,19 +75,17 @@ Clone or fork this repo:
 
 ```
 https://github.com/Ismaiana/Happy-Snacky-Project
-
 ```
 
 Create and activate a virtual environment inside Happy Snacky directory.
 
 ```
-
 virtualenv env
 source env/bin/activate
-
 ```
 
-secret 
+source your secret file
+```
 source secret.sh
 
 ```
