@@ -101,7 +101,7 @@ pip install -r requirements.txt
 
 Happy Snacky License (Version 1.0)
 
-Copyright (c) [2023] [Ismaiana Lima]
+Copyright (c) 2023 Ismaiana Lima
 
 
 ## <a name="aboutme"></a>About Me
