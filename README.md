@@ -94,7 +94,7 @@ pip install -r requirements.txt
 Sign up to use [Spoonacular Api](https://spoonacular.com/food-api) and [Sendgrid Api](https://sendgrid.com/).
 Copy your api key and save it in a file called secret.sh(using this format).
 
-Source your keys from your secrets.sh file into your virtual environment:
+Source your keys from your secret.sh file into your virtual environment:
 ```
 source secret.sh
 ```
