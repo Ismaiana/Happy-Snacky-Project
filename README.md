@@ -1,4 +1,4 @@
-# Happy-Snacky-Project
+# Happy Snacky
 
 Happy Snacky is a web application that helps users discover new products based on their allergies and dietary restrictions.
 With over 800,000 products in its database, Happy Snacky provides a comprehensive selection of grocery products options for users with diverse dietary needs.
