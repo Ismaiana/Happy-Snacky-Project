@@ -10,6 +10,7 @@ more personalized user experience.
 * [Tech Stack](#technologies)
 * [Features](#features)
 * [Installation](#install)
+* [License](#license)
 * [About Me](#aboutme)
 
 
@@ -96,4 +97,9 @@ Install the dependencies:
 pip install -r requirements.txt
 ```
 
+## <a name="license"></a>License
 
+## <a name="aboutme"></a>About Me
+
+Ismaiana is a software engineer originally from Brazil, and currently living in AZ. This is her first full stack project. 
+Visit her on [LinkedIn](http://www.linkedin.com/in/ismaiana-lima).
