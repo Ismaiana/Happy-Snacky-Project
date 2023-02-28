@@ -63,7 +63,7 @@ Saved Page: Users can save their favorite products to a saved page for easy acce
 ![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/saved-page.JPG "saved page")
 
 Forum: The forum feature allows users to share information and ask questions related to dietary restrictions and allergies. 
-Users can create new posts, comment on existing posts, and upvote helpful comments.
+Users can create new posts and comment on existing posts.
 
 ![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/forums.JPG "forum")
 
