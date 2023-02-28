@@ -1,7 +1,7 @@
 # Happy-Snacky-Project
 
-Happy Snakcy is a web application that helps users discover new products based on their allergies and dietary restrictions.
-With over 800,000 products in its database, Happy Snakcy provides a comprehensive selection of grocery products options for users with diverse dietary needs.
+Happy Snacky is a web application that helps users discover new products based on their allergies and dietary restrictions.
+With over 800,000 products in its database, Happy Snacky provides a comprehensive selection of grocery products options for users with diverse dietary needs.
 The app also features a login page, new user page, reset password with email and tokens for security, profile, forum, search bar, saved page, and filters for a 
 more personalized user experience.
 
