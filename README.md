@@ -65,3 +65,37 @@ Forum: The forum feature allows users to share information and ask questions rel
 Users can create new posts, comment on existing posts, and upvote helpful comments.
 
 ![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/forums.JPG "forum")
+
+
+## <a name="install"></a>Installation
+
+To install Happy Snacky: 
+
+Clone or fork this repo:
+
+```
+https://github.com/Ismaiana/Happy-Snacky-Project
+
+```
+
+Create and activate a virtual environment inside Happy Snacky directory.
+
+```
+
+virtualenv env
+source env/bin/activate
+
+```
+
+secret 
+source secret.sh
+
+```
+
+Install the dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+
