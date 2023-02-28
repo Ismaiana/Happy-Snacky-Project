@@ -4,42 +4,108 @@
 {% block body %}
 <style>
 
+
+body {
+  background-image: url('static/img/light-gray-concrete-wall_53876-89532.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;  
+  }
+
 .select-avatars {
-    margin-top: 20px;
-  }
-  
+  margin-top: 20px;
+}
+
 .avatar-img {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 50% black;
-  
-  }
-  
-  
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
 .btn-check:checked + .btn-outline-primary {
-    background-color: #8fcc9e;
-    color: #b0d19a;
-  }
+  background-color: #b0d39f;
+  color: #ffffff;
+}
 
 .container-avatars {
-
   height: 500px;
-  width: auto;
+  width: 2000px;
   display: flex;
   align-items: center;
- 
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background-color: rgba(250, 250, 250, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1500px;
+  width: 880px;
+  height: 750px;
+}
+
+.row {
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+.btn-outline-primary {
+  margin: 10px;
+  padding: 20px;
+  border: 2px solid #ffffff;
+  flex-basis: calc(25% - 20px);
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:hover {
+  border-color: #f7fff3;
+}
+
+input[type="submit"] {
+
+  display: block;
+  margin: auto;
+  background-color: #111111;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+
+
+  background-color: #8fcc9e;
+}
+
+@media (min-width: 576px) {
+  .btn-outline-primary {
+    margin: 20px;
+  }
 }
 
 
   </style>
 
- 
+  <div class= "container">
     <div class="media">
-      <div class="card">
-        <div class="container-avatars">
+
+          <div class="card">
+            <h1 style="margin-top: 60px;">SELECT AVATAR</h1>
           <div class="row justify-content-center">
-  <h1 style="margin-top: 60px;">SELECT AVATAR</h1>
+  
 
 <form action="/avatars_db" class="select-avatars" method="POST" >
     
@@ -60,23 +126,46 @@
     
     <input type="radio" class="btn-check" name="avatars" value="/static/img/pink-egg.png" id="pink-egg" autocomplete="off" style="visibility: hidden;">
     <label class="btn btn-outline-primary" for="pink-egg">
-      <img src="/static/img/pink-egg.png" class="avatar-img">
+      <img src="/static/img/pink-egg.png" class="avatar-img"><br>
+    </label>
+
+       
+
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/blue-tomato.png" id="blue-tomato" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="blue-tomato">
+      <img src="/static/img/blue-tomato.png" class="avatar-img">
     </label>
     
-    <input type="radio" class="btn-check" name="avatars" value="/static/img/purple-egg.png" id="purple-egg" autocomplete="off" style="visibility: hidden;">
-    <label class="btn btn-outline-primary" for="purple-egg">
-      <img src="/static/img/purple-egg.png" class="avatar-img">
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/yellow-tomato.png" id="yellow-tomato" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="yellow-tomato">
+      <img src="/static/img/yellow-tomato.png" class="avatar-img">
     </label>
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/pink-tomato.png" id="pink-tomato" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="pink-tomato">
+      <img src="/static/img/pink-tomato.png" class="avatar-img">
+    </label>
+    
+    <input type="radio" class="btn-check" name="avatars" value="/static/img/green-tomato.png" id="green-tomato" autocomplete="off" style="visibility: hidden;">
+    <label class="btn btn-outline-primary" for="green-tomato">
+      <img src="/static/img/green-tomato.png" class="avatar-img">
+    </label>
+
+  
+
 
   
   
     <br>
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" style="margin-top: 40px;">
+  
 </form>
 </div>
 </div>
 </div>
 </div>
+
 
 <script>
    

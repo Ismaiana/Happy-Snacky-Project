@@ -345,6 +345,8 @@ def add_restrictions():
 
         for dietary_restriction in dietary_restrictions:
 
+            if not dietary_restriction:
+                continue
             get_restriction = crud.get_restrictions(user.user_id, dietary_restriction)
 
             if get_restriction == []:

@@ -10,6 +10,14 @@
 <style>
 
 
+body {
+  background-image: url('static/img/light-gray-concrete-wall_53876-89532.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;  
+  }
+
+
 button {
   background-color: #111111;
   color: #fff;
@@ -101,14 +109,14 @@ color: #8fcc9e;
                 <label><input type="checkbox" class="check" value="kosher" name="restrictions-search"> Kosher</label>
               </div>
             </div> 
-          </div>
         </div>
-            
+   </div>
             <!-- RESULTS -->
-
+            <div class="col-md-6 product-card">
+              <div class="card mb-6">
             <div class="col-md-9">
              
-              
+              <br>
               <h2><i class="bi bi-cup-straw"></i> Results</h2>
               
               <hr>
@@ -175,8 +183,11 @@ color: #8fcc9e;
           </div>
        </div>
      </div>
+    </div>
+  </div> 
   </form>              
-  </div>     
+  </div>   
+ 
 
     
   {% endblock %}
