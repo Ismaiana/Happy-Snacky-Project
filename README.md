@@ -99,6 +99,11 @@ pip install -r requirements.txt
 
 ## <a name="license"></a>License
 
+Happy Snacky License (Version 1.0)
+
+Copyright (c) [2023] [Ismaiana Lima]
+
+
 ## <a name="aboutme"></a>About Me
 
 Ismaiana is a software engineer originally from Brazil, and currently living in AZ. This is her first full stack project. 
