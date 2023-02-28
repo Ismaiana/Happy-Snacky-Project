@@ -32,7 +32,7 @@ Authentication and Security: Python secrets module, Passlib.
 
 Login Page: Users can create an account or log in using their email and password. 
 The login page also includes options for resetting passwords with email and tokens for added security.
-New users can sign up for Happy Snakcy by providing their name, email, and password.
+New users can sign up for Happy Snacky by providing their name, email, and password.
 
 ![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/login-page.JPG "login page")
 
