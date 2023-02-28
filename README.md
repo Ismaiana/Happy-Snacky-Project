@@ -34,10 +34,10 @@ Login Page: Users can create an account or log in using their email and password
 The login page also includes options for resetting passwords with email and tokens for added security.
 New users can sign up for Happy Snakcy by providing their name, email, and password.
 
-![alt text](final-project/static/img/login-page.JPG)
+![alt text](src/final-project/static/img/login-page.JPG)
 
 
-![alt text](final-project/static/img/password-reset.JPG)
+![alt text](final-project/static/img/password-reset.JPG "password-reset")
 
 
 Profile Page: The user profile page allows users to add and edit their dietary restrictions, and change avatars. This information is used to display 
@@ -55,6 +55,8 @@ Product Information: Each product in Happy Snakcy's database includes a product 
 Additionally, there is a message displayed that indicates whether the product is safe for the user to consume, or if it requires the user's attention due
 to certain ingredients that they need to avoid.
 
+
+
 ![alt text](final-project/static/img/info-page.JPG)
 
 Saved Page: Users can save their favorite products to a saved page for easy access in the future.
@@ -64,4 +66,4 @@ Saved Page: Users can save their favorite products to a saved page for easy acce
 Forum: The forum feature allows users to share information and ask questions related to dietary restrictions and allergies. 
 Users can create new posts, comment on existing posts, and upvote helpful comments.
 
-![alt text](final-project/static/img/Forum-page.JPG)
+![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/Forum-page.JPG)
