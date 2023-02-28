@@ -46,13 +46,13 @@ if product is safe or not for the user.
 
 ![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/profile-page.JPG "profile page")
 
-Search Bar: Happy Snakcy includes a search bar that allows users to search for specific products or filter products based on specific dietary needs or allergies.
+Search Bar: Happy Snacky includes a search bar that allows users to search for specific products or filter products based on specific dietary needs or allergies.
 It contains filters that allow users to narrow down the product selection based on their specific dietary needs, such as gluten-free, vegan, kosher
 and manny others options.
 
 ![alt text](https://github.com/Ismaiana/Happy-Snacky-Project/blob/main/static/img/search-bar.JPG "search bar")
 
-Product Information: Each product in Happy Snakcy's database includes a product title, brand, picture, ingredients, and nutritional information. 
+Product Information: Each product in Happy Snacky's database includes a product title, brand, picture, ingredients, and nutritional information. 
 Additionally, there is a message displayed that indicates whether the product is safe for the user to consume, or if it requires the user's attention due
 to certain ingredients that they need to avoid.
 
