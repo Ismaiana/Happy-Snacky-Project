@@ -85,17 +85,34 @@ virtualenv env
 source env/bin/activate
 ```
 
-Source your secret file
-```
-source secret.sh
-
-```
-
 Install the dependencies:
 
 ```
 pip install -r requirements.txt
 ```
+
+Sign up to use [Spoonacular Api](https://spoonacular.com/food-api) and [Sendgrid Api](http://www.linkedin.com/in/ismaiana-lima](https://sendgrid.com/).
+Copy your api key and save it in a file called secret.sh(using this format).
+
+Source your keys from your secrets.sh file into your virtual environment:
+```
+source secret.sh
+```
+
+Set up the database:
+
+```
+createdb happysnacky
+python3 model.py
+python3 crud.py
+```
+
+Run the app:
+
+```
+python3 server.py
+```
+
 
 ## <a name="license"></a>License
 
