@@ -84,7 +84,7 @@ virtualenv env
 source env/bin/activate
 ```
 
-source your secret file
+Source your secret file
 ```
 source secret.sh
 
