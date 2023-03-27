@@ -102,7 +102,7 @@ source secret.sh
 Set up the database:
 
 ```
-createdb happysnacky
+createdb snacks
 python3 model.py
 python3 crud.py
 ```
